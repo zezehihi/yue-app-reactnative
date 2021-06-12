@@ -1,41 +1,58 @@
 import React, {Component} from 'react';
-import {
-  View,
-  Text,
-  Image,
-  StatusBar,
-  TextInput,
-  Keyboard,
-  TouchableOpacity,
-} from 'react-native';
+import {View, Text, Image, StatusBar, TouchableOpacity} from 'react-native';
 import request from '@/services/request';
 import Api from '@/api/api';
 import {inject, observer} from 'mobx-react';
 import {color, pxToDpH, pxToDpW, layout, size} from '@/MyStyle';
 import {Isao} from 'react-native-textinput-effects';
 import {Primary} from '@/components/button';
+import Toast from '@/components/Toast';
+
 class Login extends Component {
   state = {
     phone: '',
+    code: '',
     verificationCode: '',
     verificationCodeBtn: '获取验证码',
   };
   async componentDidMount() {}
   getVerificationCode = async () => {
-    // const {MESSAGE_VERIFICATION_CODE} = Api;
-    // const res1 = await request.get('MESSAGE_VERIFICATION_CODE');
-    // console.log(res1);
+    const {phone} = this.state;
+    const {MESSAGE_SEND_MESSAGE} = Api;
+    const url = MESSAGE_SEND_MESSAGE.replace(':tel', phone);
+    const res = await request.get(url);
+    this.setState({verificationCode: res.data.verificationCode});
   };
-  login = () => {
-    console.log('login');
+  login = async () => {
+    const {verificationCode, phone} = this.state;
+    const {MESSAGE_VERIFICATION_CODE, CHECK_USER_STATE} = Api;
+    const url = MESSAGE_VERIFICATION_CODE.replace(':code', verificationCode);
+    const res = await request.get(url);
+    const {success} = res.data;
+    // 验证码正确
+    if (success == true) {
+      // 检测当前手机号 用户状态
+      const url1 = CHECK_USER_STATE.replace(':tel', phone);
+      const res1 = await request.get(url1);
+      const {success} = res1.data;
+      if (success == true) {
+        Toast.showText('登录成功');
+        this.props.navigation.navigate('Index');
+      } else {
+        this.props.navigation.navigate('Register');
+      }
+
+      // 跳转到登录
+    } else {
+      Toast.message('验证码错误');
+    }
   };
   render() {
-    const {phone, verificationCode, verificationCodeBtn} = this.state;
+    const {phone, code, verificationCodeBtn} = this.state;
     return (
       <View
         style={{
           padding: size.globalPadding,
-          background: color.globalBackgroundColor,
         }}>
         <StatusBar backgroundColor={'transparent'} translucent={true} />
         {/* 整体框框 */}
@@ -120,13 +137,13 @@ class Login extends Component {
                 marginBottom: pxToDpH(110),
                 width: pxToDpW(560),
               }}
-              value={verificationCode}
+              value={code}
               onChangeText={text => {
-                this.setState({verificationCode: text});
+                this.setState({code: text});
               }}
             />
             <TouchableOpacity
-              onPress={this.getVerificationCode()}
+              onPress={this.getVerificationCode}
               style={{height: 'auto', alignItems: 'center'}}>
               <Text
                 style={{
@@ -163,9 +180,9 @@ class Login extends Component {
           }}>
           <Primary
             style={{marginTop: pxToDpH(200)}}
-            width={'100%'}
+            width={pxToDpW(900)}
             height={pxToDpH(180)}
-            onPress={this.login()}>
+            onPress={this.login}>
             登录
           </Primary>
         </View>

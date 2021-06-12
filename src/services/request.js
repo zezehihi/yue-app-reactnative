@@ -1,12 +1,12 @@
 import axios from 'axios';
 import RootStore from '@/stores';
 import {Platform} from 'react-native';
-//
-export const baseUrl = 'http:///172.20.10.9:8803/yue';
+import Toast from '@/components/Toast';
+import Api from '@/api/api';
 const token = RootStore.token;
 
 const instance = axios.create({
-  baseURL: baseUrl,
+  baseURL: Api.BASE_URI,
   headers: {
     'content-type': 'application/json',
   },
@@ -14,7 +14,7 @@ const instance = axios.create({
 // 添加请求拦截器
 instance.interceptors.request.use(
   function (config) {
-    console.log('请求参数：', config);
+    //Toast.showLoading('请求中');
     return config;
   },
   error => {
@@ -25,7 +25,7 @@ instance.interceptors.request.use(
 // 添加响应拦截器
 instance.interceptors.response.use(
   function (response) {
-    console.log('返回结果：', response);
+    // Toast.hideLoading();
     return response;
   },
   error => {

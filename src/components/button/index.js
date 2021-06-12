@@ -9,6 +9,8 @@ class Primary extends Component {
     progress: false,
     fontSize: 16,
     textFamily: '等距更纱黑体 Slab SC Extralight',
+    height: 100,
+    width: 200,
   };
   render() {
     return (

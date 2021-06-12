@@ -21,7 +21,7 @@ export default class App extends Component {
   render() {
     let store = RootStore;
     return (
-      <View style={{flex: 1}}>
+      <View style={{flex: 1, backgroundColor: color.globalBackgroundColor}}>
         <Provider {...store}>
           <Nav></Nav>
         </Provider>
