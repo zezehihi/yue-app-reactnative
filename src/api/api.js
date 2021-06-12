@@ -19,6 +19,10 @@ const Api = {
    * 检查当前用户是否存在
    */
   CHECK_USER_STATE: `${api}/user/checkUserState/:tel`,
+  /**
+   * 注册用户
+   */
+  REGISTER_USER: `${api}/user/registerUser`,
 };
 
 export default Api;

@@ -39,7 +39,7 @@ class Login extends Component {
         Toast.showText('登录成功');
         this.props.navigation.navigate('Index');
       } else {
-        this.props.navigation.navigate('Register');
+        this.props.navigation.navigate('Register', phone);
       }
 
       // 跳转到登录
@@ -103,7 +103,6 @@ class Login extends Component {
               style={{
                 marginBottom: pxToDpH(110),
               }}
-              value={phone}
               onChangeText={text => {
                 this.setState({phone: text});
               }}
