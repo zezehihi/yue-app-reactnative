@@ -58,3 +58,9 @@ buck-out/
 # CocoaPods
 /ios/Pods/
 a.cmd
+
+.prettierrc.js
+package-lock.json
+yarn.lock
+.editorconfig
+.buckconfig
