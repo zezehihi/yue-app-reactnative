@@ -7,7 +7,10 @@ import {color, pxToDpH, pxToDpW, layout, size} from '@/MyStyle';
 import {Isao} from 'react-native-textinput-effects';
 import {Primary} from '@/components/button';
 import Toast from '@/components/Toast';
+import AsyncStorage from '@react-native-community/async-storage';
 
+@inject('AccountStore')
+@observer
 class Login extends Component {
   state = {
     phone: '',
@@ -37,6 +40,28 @@ class Login extends Component {
       const {success} = res1.data;
       if (success == true) {
         Toast.showText('登录成功');
+        //  存储用户数据到 mobx中
+        this.props.AccountStore.setUserInfo(
+          phone,
+          res1.data.token,
+          res1.data.id,
+          res1.data.user.username,
+          res1.data.user.nickname,
+          res1.data.user.photo,
+        );
+        //  存储用户数据到 本地缓存中  永久
+        AsyncStorage.setItem(
+          'userinfo',
+          JSON.stringify({
+            tel: phone,
+            token: res1.data.token,
+            userId: res1.data.id,
+            username: res1.data.user.username,
+            nickname: res1.data.user.nickname,
+            photo: res1.data.user.photo,
+          }),
+        );
+
         this.props.navigation.navigate('Index');
       } else {
         this.props.navigation.navigate('Register', phone);

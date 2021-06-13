@@ -1,8 +1,7 @@
-import AccountStore from '@/stores/account/accountStore';
-
+import AccountStore from '@/stores/account';
 
 const store = {
-  AccountStore
+  AccountStore,
 };
 
 export default store;

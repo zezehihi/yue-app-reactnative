@@ -15,17 +15,18 @@ class Nav extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      initialRouteName: this.props.AccountStore.token ? 'Login' : 'Login',
+      initialRouteName: this.props.AccountStore.token ? 'Index' : 'Login',
     };
   }
   render() {
     const {initialRouteName} = this.state;
+    console.log(initialRouteName);
     return (
       <NavigationContainer>
         <Stack.Navigator headerMode="none" initialRouteName={initialRouteName}>
+          <Stack.Screen name="Index" component={Index} />
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Register" component={Register} />
-          <Stack.Screen name="Index" component={Index} />
         </Stack.Navigator>
       </NavigationContainer>
     );

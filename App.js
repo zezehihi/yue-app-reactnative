@@ -1,29 +1,40 @@
 import React, {Component} from 'react';
 import {View} from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
 import RootStore from '@/stores';
-import Nav from '@/routes';
 import {Provider} from 'mobx-react';
 import {color, size} from '@/MyStyle';
-
+import AsyncStorage from '@react-native-community/async-storage';
+import AccountStore from '@/stores/account';
+import Nav from '@/routes';
 export default class App extends Component {
-  state = {};
+  state = {
+    showNav: false,
+  };
   async componentDidMount() {
     // 获取缓存中的用户数据 手机本地
     const strUserInfo = await AsyncStorage.getItem('userinfo');
+    console.log(strUserInfo);
     const userinfo = strUserInfo ? JSON.parse(strUserInfo) : {};
     // 判断有没有token
     if (userinfo.token) {
-      // TODO 把缓存中的数据存一份到mobx中
-      //RootStore.setUserInfo(userinfo.mobile, userinfo.token, userinfo.usrId);
+      //TODO 把缓存中的数据存一份到mobx中
+      AccountStore.setUserInfo(
+        userinfo.tel,
+        userinfo.token,
+        userinfo.userId,
+        userinfo.username,
+        userinfo.photo,
+      );
     }
+    // 检查完成后再显示nav
+    this.setState({showNav: true});
   }
   render() {
     let store = RootStore;
     return (
       <View style={{flex: 1, backgroundColor: color.globalBackgroundColor}}>
         <Provider {...store}>
-          <Nav></Nav>
+          {this.state.showNav ? <Nav></Nav> : <></>}
         </Provider>
       </View>
     );
