@@ -1,3 +1,32 @@
+diff --git a/node_modules/teaset/components/ActionPopover/ActionPopover.js b/node_modules/teaset/components/ActionPopover/ActionPopover.js
+index 4a61328..5ecb90e 100644
+--- a/node_modules/teaset/components/ActionPopover/ActionPopover.js
++++ b/node_modules/teaset/components/ActionPopover/ActionPopover.js
+@@ -16,9 +16,10 @@ export default class ActionPopover extends Overlay {
+   // items shape
+   //   title: PropTypes.string.isRequired,
+   //   onPress: PropTypes.func,
+-  static show(fromBounds, items, options = {}) {
++  static show(fromBounds, items, options = {},style={}) {
+     return super.show(
+-      <this.ActionPopoverView fromBounds={fromBounds} items={items} {...options} />
++      <this.ActionPopoverView fromBounds={fromBounds} items={items} {...options}
++      />
+     );
+   }
+ 
+diff --git a/node_modules/teaset/components/ActionPopover/ActionPopoverView.js b/node_modules/teaset/components/ActionPopover/ActionPopoverView.js
+index c9e88ac..b15eabe 100644
+--- a/node_modules/teaset/components/ActionPopover/ActionPopoverView.js
++++ b/node_modules/teaset/components/ActionPopover/ActionPopoverView.js
+@@ -57,6 +57,7 @@ export default class ActionPopoverView extends Overlay.PopoverView {
+           key={'item' + i}
+           title={item.title}
+           leftSeparator={i !== 0}
++          rightSeparator={i !== items.length-1}
+           onPress={() => this.onItemPress(item)}
+           />
+       );
 diff --git a/node_modules/teaset/components/ListRow/TouchableOpacity.js b/node_modules/teaset/components/ListRow/TouchableOpacity.js
 index 8fc32cf..a4f1fb3 100644
 --- a/node_modules/teaset/components/ListRow/TouchableOpacity.js

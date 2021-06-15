@@ -7,6 +7,7 @@ const Api = {
   //BASE_URI: 'http://172.20.10.9:8803',
   //懒得开热点用
   BASE_URI: 'http://localhost:8803',
+  FILE_URI: 'http://yun.1dtfc.com',
   /**
    *  校验验证码
    */

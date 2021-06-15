@@ -6,14 +6,19 @@ import {color, size} from '@/MyStyle';
 import AsyncStorage from '@react-native-community/async-storage';
 import AccountStore from '@/stores/account';
 import Nav from '@/routes';
+import {Theme} from 'teaset';
 export default class App extends Component {
   state = {
     showNav: false,
   };
   async componentDidMount() {
+    // 修改teasetTheme
+    Theme.set({
+      apItemTitleColor: 'black',
+      apBorderRadius: 20,
+    });
     // 获取缓存中的用户数据 手机本地
     const strUserInfo = await AsyncStorage.getItem('userinfo');
-    console.log(strUserInfo);
     const userinfo = strUserInfo ? JSON.parse(strUserInfo) : {};
     // 判断有没有token
     if (userinfo.token) {

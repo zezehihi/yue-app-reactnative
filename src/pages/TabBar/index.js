@@ -38,17 +38,22 @@ class TabBar extends Component {
     tab1: <Message />,
     tab2: <YueJu />,
     tab3: <My />,
+    curAction: '',
   };
 
   showActionPopover = curTab => {
-    if (this.state.selectedTab == curTab) {
-      this.show(curTab);
-    }
+    //  if (this.state.selectedTab == curTab) {
+    console.log(this.state.curAction);
+    ActionPopover.hide(this.state.curAction);
+    const key = this.show(curTab);
+    this.setState({curAction: key});
+    //}
     this.setState({selectedTab: curTab});
   };
 
   show(curTab) {
     let items = [];
+    let key = '';
     let options = {
       direction: 'down',
       popoverStyle: {
@@ -86,7 +91,7 @@ class TabBar extends Component {
           },
         ];
 
-        ActionPopover.show(
+        key = ActionPopover.show(
           {x: 10, y: screenHeight - 80, width: 200, height: 200},
           items,
           options,
@@ -115,7 +120,7 @@ class TabBar extends Component {
           },
           {title: '设置', onPress: () => alert('设置')},
         ];
-        ActionPopover.show(
+        key = ActionPopover.show(
           {x: 80, y: screenHeight - 80, width: 200, height: 200},
           items,
           options,
@@ -137,7 +142,7 @@ class TabBar extends Component {
             },
           },
         ];
-        ActionPopover.show(
+        key = ActionPopover.show(
           {x: 160, y: screenHeight - 80, width: 200, height: 200},
           items,
           options,
@@ -145,6 +150,7 @@ class TabBar extends Component {
         break;
       }
     }
+    return key;
   }
   componentDidMount() {}
   render() {

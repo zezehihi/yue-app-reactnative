@@ -19,6 +19,7 @@ const size = {
   globalPadding: pxToDpW(75),
   font1: pxToDpH(60),
   font2: pxToDpH(42),
+  font3: pxToDpH(54),
 };
 /**
  * layout

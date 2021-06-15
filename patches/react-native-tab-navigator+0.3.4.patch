@@ -1,0 +1,39 @@
+diff --git a/node_modules/react-native-tab-navigator/TabNavigator.js b/node_modules/react-native-tab-navigator/TabNavigator.js
+index df32dd5..926f050 100644
+--- a/node_modules/react-native-tab-navigator/TabNavigator.js
++++ b/node_modules/react-native-tab-navigator/TabNavigator.js
+@@ -20,7 +20,7 @@ export default class TabNavigator extends React.Component {
+   static propTypes = {
+     ...ViewPropTypes,
+     sceneStyle: ViewPropTypes.style,
+-    tabBarStyle: TabBar.propTypes.style,
++    tabBarStyle: ViewPropTypes.style,
+     tabBarShadowStyle: TabBar.propTypes.shadowStyle,
+     hidesTabTouch: PropTypes.bool
+   };
+diff --git a/node_modules/react-native-tab-navigator/TabNavigatorItem.js b/node_modules/react-native-tab-navigator/TabNavigatorItem.js
+index 0f0e202..7b94a5c 100644
+--- a/node_modules/react-native-tab-navigator/TabNavigatorItem.js
++++ b/node_modules/react-native-tab-navigator/TabNavigatorItem.js
+@@ -2,10 +2,7 @@
+ 
+ import React from 'react';
+ import PropTypes from 'prop-types';
+-import {
+-  Text,
+-  View,
+-} from 'react-native';
++import {Text, View} from 'react-native';
+ 
+ import ViewPropTypes from './config/ViewPropTypes';
+ 
+@@ -24,8 +21,7 @@ export default class TabNavigatorItem extends React.Component {
+     allowFontScaling: PropTypes.bool,
+   };
+ 
+-  static defaultProps = {
+-  };
++  static defaultProps = {};
+ 
+   render() {
+     let child = React.Children.only(this.props.children);
