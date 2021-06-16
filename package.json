@@ -13,6 +13,7 @@
   "dependencies": {
     "@babel/plugin-proposal-decorators": "^7.14.2",
     "@react-native-community/async-storage": "^1.12.1",
+    "@react-native-community/blur": "^3.6.0",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-native-community/viewpager": "^5.0.11",
     "@react-navigation/native": "^5.9.4",
@@ -34,12 +35,14 @@
     "react-native-safe-area-context": "^3.2.0",
     "react-native-screens": "^3.3.0",
     "react-native-scrollable-tab-view": "^1.0.0",
+    "react-native-sound-player": "^0.10.9",
     "react-native-svg": "^12.1.1",
     "react-native-svg-uri": "^1.2.3",
     "react-native-swiper-flatlist": "^3.0.14",
     "react-native-tab-navigator": "^0.3.4",
     "react-native-textinput-effects": "^0.6.2",
     "react-native-vector-icons": "^8.1.0",
+    "react-native-video": "^5.1.1",
     "teaset": "^0.7.5"
   },
   "devDependencies": {

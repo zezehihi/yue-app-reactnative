@@ -198,6 +198,10 @@ dependencies {
     compile 'com.facebook.fresco:animated-gif:0.11.0'  //需要GIF动画支持添加本行语句
     compile 'com.facebook.fresco:webpsupport:0.11.0'  //需要WebP格式支持添加本行语句
     compile 'com.facebook.fresco:animated-webp:0.11.0'  //需要WebP动画支持添加本行语句
+
+    compile project(':react-native-video')
+    implementation "androidx.appcompat:appcompat:1.0.0"
+
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
       exclude group:'com.facebook.fbjni'
     }

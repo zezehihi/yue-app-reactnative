@@ -37,7 +37,7 @@ const Api = {
    * 网易云音乐API
    */
   /**
-   * 获取歌单 就这里吧（）
+   * 获取歌单 就这里吧（。
    */
   GET_MUSIC_LIST: `https://cloudmusic.1dtfc.com/playlist/detail?id=142026624`,
 };
