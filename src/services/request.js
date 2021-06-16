@@ -6,7 +6,6 @@ import Api from '@/api/api';
 const token = RootStore.token;
 
 const instance = axios.create({
-  baseURL: Api.BASE_URI,
   headers: {
     'content-type': 'application/json',
   },

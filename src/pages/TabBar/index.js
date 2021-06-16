@@ -63,6 +63,7 @@ class TabBar extends Component {
         borderBottomWidth: 1,
         borderColor: '#cccccc',
       },
+      showArrow: false,
       style: {
         elevation: 10,
         shadowColor: '#888888',
@@ -92,7 +93,7 @@ class TabBar extends Component {
         ];
 
         key = ActionPopover.show(
-          {x: 10, y: screenHeight - 80, width: 200, height: 200},
+          {x: 10, y: pxToDpH(1350), width: 200, height: 200},
           items,
           options,
         );
@@ -121,7 +122,7 @@ class TabBar extends Component {
           {title: '设置', onPress: () => alert('设置')},
         ];
         key = ActionPopover.show(
-          {x: 80, y: screenHeight - 80, width: 200, height: 200},
+          {x: 80, y: pxToDpH(1350), width: 200, height: 200},
           items,
           options,
         );
@@ -143,7 +144,7 @@ class TabBar extends Component {
           },
         ];
         key = ActionPopover.show(
-          {x: 160, y: screenHeight - 80, width: 200, height: 200},
+          {x: 160, y: pxToDpH(1350), width: 200, height: 200},
           items,
           options,
         );

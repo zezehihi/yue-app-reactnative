@@ -13,6 +13,8 @@ import Store from '@/pages/store';
 import Message from '@/pages/message';
 import YueJu from '@/pages/yueju';
 import Collect from '@/pages/collect';
+import SearchResult from '@/pages/searchResult';
+import Music from '@/pages/music';
 
 const Stack = createStackNavigator();
 
@@ -22,7 +24,7 @@ class Nav extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      initialRouteName: this.props.AccountStore.token ? 'Index' : 'Login',
+      initialRouteName: this.props.AccountStore.token ? 'Music' : 'Login',
     };
   }
   render() {
@@ -39,6 +41,9 @@ class Nav extends Component {
           <Stack.Screen name="Message" component={Message} />
           <Stack.Screen name="YueJu" component={YueJu} />
           <Stack.Screen name="Collect" component={Collect} />
+          <Stack.Screen name="SearchResult" component={SearchResult} />
+          <Stack.Screen name="TabBar" component={TabBar} />
+          <Stack.Screen name="Music" component={Music} />
         </Stack.Navigator>
       </NavigationContainer>
     );

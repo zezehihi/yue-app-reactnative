@@ -13,18 +13,42 @@ import {color, pxToDpH, pxToDpW, layout, size} from '@/MyStyle';
 import {Carousel} from 'teaset';
 import SearchBar from '@/components/searchBar';
 import Swiper from '@/pages/index/components/swiper';
+import Api from '@/api/api';
+import request from '@/services/request';
+import {observer} from 'mobx-react';
+@observer
 class Index extends Component {
   state = {
     search: '',
+    newsList: '',
+    musicList: '',
   };
 
   updateSearch = search => {
     this.setState({search});
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.getCarouselNews();
+    this.getMusicList();
+  }
+
+  getCarouselNews = async () => {
+    const {GET_NEWS_LIST} = Api;
+    const url = GET_NEWS_LIST.replace(':size', 4);
+    let res = await request.get(url);
+    this.setState({newsList: res.data.newsList});
+  };
+
+  getMusicList = async () => {
+    const {GET_MUSIC_LIST} = Api;
+    let res = await request.get(GET_MUSIC_LIST);
+    this.setState({musicList: res.data.playlist.tracks.splice(0, 4)});
+    console.log(this.state.musicList);
+  };
+
   render() {
-    const {search} = this.state;
+    const {musicList, newsList} = this.state;
     return (
       <ScrollView>
         <StatusBar backgroundColor={'transparent'} translucent={true} />
@@ -36,13 +60,15 @@ class Index extends Component {
           }}>
           <SearchBar />
         </View>
-        {/* 导航栏区域  */}
+        {/* 导航栏+轮播区域  */}
         <View
           style={{
             paddingLeft: size.globalPadding,
             paddingRight: size.globalPadding,
           }}>
-          <Swiper />
+          {/* 轮播图 */}
+          {newsList.length != 0 ? <Swiper data={newsList} /> : <></>}
+
           {/* 导航栏图标 */}
           <View
             style={{
@@ -94,12 +120,12 @@ class Index extends Component {
           </View>
           {/*  */}
         </View>
-        {/* 专栏:热度推荐 */}
+        {/* 专栏:名家唱段 */}
         <View
           style={{
             marginTop: pxToDpH(150),
           }}>
-          <Text style={styles.columnTitle}>热度推荐</Text>
+          <Text style={styles.columnTitle}>名家唱段</Text>
           <View
             style={{
               elevation: 5,
@@ -114,82 +140,35 @@ class Index extends Component {
               flexDirection: 'row',
               justifyContent: 'space-around',
             }}>
-            <View style={styles.columnItemsContainer}>
-              <View
-                style={{
-                  borderRadius: 10,
-                  overflow: 'hidden',
-                  width: '100%',
-                  height: '70%',
-                  marginBottom: pxToDpH(20),
-                }}>
+            {musicList.length != 0 ? (
+              musicList.map((v, i) => (
+                <TouchableOpacity style={styles.columnItemsContainer}>
+                  <View style={styles.columnImageContainer}>
+                    <Image
+                      source={{uri: v.al.picUrl}}
+                      style={{width: '100%', height: '100%'}}
+                    />
+                  </View>
+                  <Text style={{textAlign: 'center', fontSize: size.font2}}>
+                    {v.name}
+                  </Text>
+                </TouchableOpacity>
+              ))
+            ) : (
+              <></>
+            )}
+            {console.log(musicList.length)}
+            {/* <View style={styles.columnItemsContainer}>
+              <View style={styles.columnImageContainer}>
                 <Image
                   source={require('@/assets/images/1.jpg')}
                   style={{width: '100%', height: '100%'}}
                 />
               </View>
-
               <Text style={{textAlign: 'center', fontSize: size.font2}}>
                 《刘毅传书》 上
               </Text>
-            </View>
-            <View style={styles.columnItemsContainer}>
-              <View
-                style={{
-                  borderRadius: 10,
-                  overflow: 'hidden',
-                  width: '100%',
-                  height: '70%',
-                  marginBottom: pxToDpH(20),
-                }}>
-                <Image
-                  source={require('@/assets/images/1.jpg')}
-                  style={{width: '100%', height: '100%'}}
-                />
-              </View>
-
-              <Text style={{textAlign: 'center', fontSize: size.font2}}>
-                《刘毅传书》 上
-              </Text>
-            </View>
-            <View style={styles.columnItemsContainer}>
-              <View
-                style={{
-                  borderRadius: 10,
-                  overflow: 'hidden',
-                  width: '100%',
-                  height: '70%',
-                  marginBottom: pxToDpH(20),
-                }}>
-                <Image
-                  source={require('@/assets/images/1.jpg')}
-                  style={{width: '100%', height: '100%'}}
-                />
-              </View>
-
-              <Text style={{textAlign: 'center', fontSize: size.font2}}>
-                《刘毅传书》 上
-              </Text>
-            </View>
-            <View style={styles.columnItemsContainer}>
-              <View
-                style={{
-                  borderRadius: 10,
-                  overflow: 'hidden',
-                  width: '100%',
-                  height: '70%',
-                  marginBottom: pxToDpH(20),
-                }}>
-                <Image
-                  source={require('@/assets/images/1.jpg')}
-                  style={{width: '100%', height: '100%'}}
-                />
-              </View>
-
-              <Text style={{textAlign: 'center', fontSize: size.font2}}>
-                《刘毅传书》 上
-              </Text>
-            </View>
+            </View> */}
           </View>
         </View>
         {/* 专栏:热度推荐 */}
@@ -197,7 +176,7 @@ class Index extends Component {
           style={{
             marginTop: pxToDpH(150),
           }}>
-          <Text style={styles.columnTitle}>名家唱段</Text>
+          <Text style={styles.columnTitle}>视频推荐</Text>
           <View
             style={{
               elevation: 5,
@@ -328,5 +307,12 @@ const styles = StyleSheet.create({
     height: pxToDpH(340),
     marginBottom: pxToDpH(20),
     marginTop: pxToDpH(20),
+  },
+  columnImageContainer: {
+    borderRadius: 10,
+    overflow: 'hidden',
+    width: '100%',
+    height: '70%',
+    marginBottom: pxToDpH(20),
   },
 });
