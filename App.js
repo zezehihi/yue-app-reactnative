@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import {View} from 'react-native';
 import RootStore from '@/stores';
 import {Provider} from 'mobx-react';
-import {color, size} from '@/MyStyle';
 import AsyncStorage from '@react-native-community/async-storage';
 import AccountStore from '@/stores/account';
+import {color, pxToDpH, pxToDpW, layout, size} from '@/MyStyle';
 import Nav from '@/routes';
 import {Theme} from 'teaset';
 export default class App extends Component {

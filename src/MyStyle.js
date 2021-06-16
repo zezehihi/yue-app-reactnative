@@ -1,4 +1,3 @@
-import {Dimensions} from 'react-native';
 import {pxToDpW, pxToDpH} from '@/utils/stylesKits';
 import {StyleSheet} from 'react-native';
 /**
