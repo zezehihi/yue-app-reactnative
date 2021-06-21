@@ -1,3 +1,4 @@
 export default {
-  iconsuo: '\ue657',
+  arrowleft: '\ue860',
+  ellipsis: '\ue887',
 };

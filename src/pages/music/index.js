@@ -18,6 +18,7 @@ import request from '@/services/request';
 import {observer} from 'mobx-react';
 import SoundPlayer from 'react-native-sound-player';
 import {BlurView, VibrancyView} from '@react-native-community/blur';
+import TopNav from '@/components/topNav';
 
 class Index extends Component {
   state = {
@@ -59,6 +60,7 @@ class Index extends Component {
         <StatusBar backgroundColor={'transparent'} translucent={true} />
         <View style={styles.contentStyle}>
           <Image></Image>
+          <TopNav title={music.name} color="white" />
         </View>
       </ImageBackground>
     );
@@ -82,7 +84,6 @@ var styles = StyleSheet.create({
     top: 0,
   },
   contentStyle: {
-    backgroundColor: 'red',
     paddingLeft: size.globalPadding,
     paddingRight: size.globalPadding,
   },
