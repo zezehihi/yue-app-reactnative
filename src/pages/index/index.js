@@ -24,6 +24,7 @@ class Index extends Component {
     search: '',
     newsList: '',
     musicList: '',
+    videoList: '',
   };
 
   updateSearch = search => {
@@ -33,6 +34,7 @@ class Index extends Component {
   componentDidMount() {
     this.getCarouselNews();
     this.getMusicList();
+    this.getVideoList();
   }
 
   getCarouselNews = async () => {
@@ -45,12 +47,25 @@ class Index extends Component {
   getMusicList = async () => {
     const {GET_MUSIC_LIST} = Api;
     let res = await request.get(GET_MUSIC_LIST);
-    this.setState({musicList: res.data.playlist.tracks.splice(0, 4)});
+    this.setState({musicList: res.data.playlist.tracks.slice(0, 4)});
     console.log(this.state.musicList);
+  };
+  getVideoList = async () => {
+    const {SEARCH} = Api;
+    // SEARCH: `${MUSIC_URI}/?keywords=:&type=:type&offset=:offset&limit=:limit`,
+    const url = SEARCH.replace(':keywords', '越剧')
+      .replace(':type', 1014)
+      .replace(':offset', '')
+      .replace(':limit', '');
+
+    let res = await request.get(url);
+
+    this.setState({videoList: res.data.result.videos.slice(11, 15)});
+    console.log(this.state.videoList);
   };
 
   render() {
-    const {musicList, newsList} = this.state;
+    const {musicList, newsList, videoList} = this.state;
     return (
       <ScrollView>
         <StatusBar backgroundColor={'transparent'} translucent={true} />
@@ -155,25 +170,13 @@ class Index extends Component {
                     />
                   </View>
                   <Text style={{textAlign: 'center', fontSize: size.font2}}>
-                    {v.name}
+                    {v.name.length > 8 ? v.name.slice(0, 8) + '...' : v.name}
                   </Text>
                 </TouchableOpacity>
               ))
             ) : (
               <></>
             )}
-            {console.log(musicList.length)}
-            {/* <View style={styles.columnItemsContainer}>
-              <View style={styles.columnImageContainer}>
-                <Image
-                  source={require('@/assets/images/1.jpg')}
-                  style={{width: '100%', height: '100%'}}
-                />
-              </View>
-              <Text style={{textAlign: 'center', fontSize: size.font2}}>
-                《刘毅传书》 上
-              </Text>
-            </View> */}
           </View>
         </View>
         {/* 专栏:热度推荐 */}
@@ -196,82 +199,34 @@ class Index extends Component {
               flexDirection: 'row',
               justifyContent: 'space-around',
             }}>
-            <View style={styles.columnItemsContainer}>
-              <View
-                style={{
-                  borderRadius: 10,
-                  overflow: 'hidden',
-                  width: '100%',
-                  height: '70%',
-                  marginBottom: pxToDpH(20),
-                }}>
-                <Image
-                  source={require('@/assets/images/1.jpg')}
-                  style={{width: '100%', height: '100%'}}
-                />
-              </View>
+            {videoList.length != 0 ? (
+              videoList.map((v, i) => (
+                <TouchableOpacity
+                  key={i}
+                  style={styles.columnItemsContainer}
+                  onPress={() => this.context.navigate('Music', v.id)}>
+                  <View
+                    style={{
+                      borderRadius: 10,
+                      overflow: 'hidden',
+                      width: '100%',
+                      height: '70%',
+                      marginBottom: pxToDpH(20),
+                    }}>
+                    <Image
+                      source={{uri: v.coverUrl}}
+                      style={{width: '100%', height: '100%'}}
+                    />
+                  </View>
 
-              <Text style={{textAlign: 'center', fontSize: size.font2}}>
-                《刘毅传书》 上
-              </Text>
-            </View>
-            <View style={styles.columnItemsContainer}>
-              <View
-                style={{
-                  borderRadius: 10,
-                  overflow: 'hidden',
-                  width: '100%',
-                  height: '70%',
-                  marginBottom: pxToDpH(20),
-                }}>
-                <Image
-                  source={require('@/assets/images/1.jpg')}
-                  style={{width: '100%', height: '100%'}}
-                />
-              </View>
-
-              <Text style={{textAlign: 'center', fontSize: size.font2}}>
-                《刘毅传书》 上
-              </Text>
-            </View>
-            <View style={styles.columnItemsContainer}>
-              <View
-                style={{
-                  borderRadius: 10,
-                  overflow: 'hidden',
-                  width: '100%',
-                  height: '70%',
-                  marginBottom: pxToDpH(20),
-                }}>
-                <Image
-                  source={require('@/assets/images/1.jpg')}
-                  style={{width: '100%', height: '100%'}}
-                />
-              </View>
-
-              <Text style={{textAlign: 'center', fontSize: size.font2}}>
-                《刘毅传书》 上
-              </Text>
-            </View>
-            <View style={styles.columnItemsContainer}>
-              <View
-                style={{
-                  borderRadius: 10,
-                  overflow: 'hidden',
-                  width: '100%',
-                  height: '70%',
-                  marginBottom: pxToDpH(20),
-                }}>
-                <Image
-                  source={require('@/assets/images/1.jpg')}
-                  style={{width: '100%', height: '100%'}}
-                />
-              </View>
-
-              <Text style={{textAlign: 'center', fontSize: size.font2}}>
-                《刘毅传书》 上
-              </Text>
-            </View>
+                  <Text style={{textAlign: 'center', fontSize: size.font2}}>
+                    {v.title.length > 8 ? v.title.slice(0, 8) + '...' : v.title}
+                  </Text>
+                </TouchableOpacity>
+              ))
+            ) : (
+              <></>
+            )}
           </View>
         </View>
       </ScrollView>
