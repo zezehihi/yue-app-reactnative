@@ -39,7 +39,7 @@ const Api = {
   /**
    * 获取歌单 就这里吧（。
    */
-  GET_MUSIC_LIST: `https://cloudmusic.1dtfc.com/playlist/detail?id=142026624`,
+  GET_MUSIC_LIST: `https://cloudmusic.1dtfc.com/playlist/detail?id=84155700`,
 };
 
 export default Api;

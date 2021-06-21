@@ -24,7 +24,7 @@ class Nav extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      initialRouteName: this.props.AccountStore.token ? 'Music' : 'Login',
+      initialRouteName: this.props.AccountStore.token ? 'Index' : 'Login',
     };
   }
   render() {

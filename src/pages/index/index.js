@@ -16,8 +16,10 @@ import Swiper from '@/pages/index/components/swiper';
 import Api from '@/api/api';
 import request from '@/services/request';
 import {observer} from 'mobx-react';
+import {NavigationContext} from '@react-navigation/native';
 @observer
 class Index extends Component {
+  static contextType = NavigationContext;
   state = {
     search: '',
     newsList: '',
@@ -142,7 +144,10 @@ class Index extends Component {
             }}>
             {musicList.length != 0 ? (
               musicList.map((v, i) => (
-                <TouchableOpacity style={styles.columnItemsContainer}>
+                <TouchableOpacity
+                  key={i}
+                  style={styles.columnItemsContainer}
+                  onPress={() => this.context.navigate('Music', v.id)}>
                   <View style={styles.columnImageContainer}>
                     <Image
                       source={{uri: v.al.picUrl}}

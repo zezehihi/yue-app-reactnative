@@ -43,7 +43,7 @@ class Index extends Component {
             {this.props.title}
           </Text>
           <TouchableOpacity
-            onPress={this.context.goBack}
+            onPress={this.props.onRightPress || function () {}}
             style={{
               width: pxToDpW(80),
               flexDirection: 'row',
