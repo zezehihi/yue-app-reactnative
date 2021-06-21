@@ -24,22 +24,21 @@ class Index extends Component {
     musicId: '22654572',
     music: '',
     musicPic: 'http://yun.1dtfc.com/images/other/white.jpg',
+    musicUrl: '',
   };
   componentDidMount() {
-    this.getTrueMusicUrl();
-    this.getMusicInformation();
+    const {musicId} = this.state;
+    this.getTrueMusicUrl(musicId);
+    this.getMusicInformation(musicId);
   }
   getTrueMusicUrl = async id => {
-    const url =
-      'https://cloudmusic.1dtfc.com/song/url?id=22654572&realIP=116.25.146.177';
+    const url = `https://cloudmusic.1dtfc.com/song/url?id=${id}&realIP=116.25.146.177`;
     const res = await request.get(url);
-    console.log(res);
-    SoundPlayer.playUrl(
-      'https://music.163.com/song/media/outer/url?id=22654572',
-    );
+    console.log(res.data.data[0].url);
+    this.setState({musicUrl: res.data.data[0].url});
+    SoundPlayer.playUrl(res.data.data[0].url);
   };
   getMusicInformation = async id => {
-    id = '22654572';
     const url = `https://cloudmusic.1dtfc.com/song/detail?ids=${id}`;
     const res = await request.get(url);
     this.setState({
@@ -51,7 +50,6 @@ class Index extends Component {
     const {music, musicPic} = this.state;
     return (
       <ImageBackground source={{uri: musicPic}} style={styles.container}>
-        {/* in terms of positioning and zIndex-ing everything before the BlurView will be blurred */}
         <BlurView
           style={styles.absolute}
           blurType="dark"
