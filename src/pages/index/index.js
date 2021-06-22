@@ -65,7 +65,7 @@ class Index extends Component {
   };
 
   render() {
-    const {musicList, newsList, videoList} = this.state;
+    const {musicList, newsList, videoList, search} = this.state;
     return (
       <ScrollView>
         <StatusBar backgroundColor={'transparent'} translucent={true} />
@@ -75,7 +75,13 @@ class Index extends Component {
             padding: size.globalPadding,
             alignItems: 'center',
           }}>
-          <SearchBar />
+          <SearchBar
+            onEndEditing={() =>
+              this.context.navigate('SearchResult', this.state.search)
+            }
+            value={search}
+            onChangeText={this.updateSearch}
+          />
         </View>
         {/* 导航栏+轮播区域  */}
         <View

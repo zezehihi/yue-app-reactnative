@@ -7,4 +7,5 @@ export default {
   pause: '\ue890',
   like: '\ue805',
   star: '\ue839',
+  down: '\ue859',
 };

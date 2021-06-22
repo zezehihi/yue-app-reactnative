@@ -4,23 +4,16 @@ import {Text, Dimensions, StyleSheet, View, Image} from 'react-native';
 import {color, pxToDpH, pxToDpW, layout, size} from '@/MyStyle';
 import {SwiperFlatList} from 'react-native-swiper-flatlist';
 export default class extends Component {
-  state = {
-    search: '',
-  };
-
-  updateSearch = search => {
-    this.setState({search});
-  };
   render() {
-    const {search} = this.state;
     return (
       <SearchBar
         platform="android"
         lightTheme={true}
         placeholder="戏剧搜索"
         color={'#667580'}
-        onChangeText={this.updateSearch}
-        value={search}
+        onEndEditing={this.props.onEndEditing}
+        onChangeText={this.props.onChangeText}
+        value={this.props.value}
         containerStyle={styles.container}
         inputContainerStyle={styles.inputContainer}
         inputStyle={styles.input}
