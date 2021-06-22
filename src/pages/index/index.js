@@ -204,7 +204,7 @@ class Index extends Component {
                 <TouchableOpacity
                   key={i}
                   style={styles.columnItemsContainer}
-                  onPress={() => this.context.navigate('Music', v.id)}>
+                  onPress={() => this.context.navigate('Video', v.vid)}>
                   <View
                     style={{
                       borderRadius: 10,

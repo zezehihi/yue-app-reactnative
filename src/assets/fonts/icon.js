@@ -5,4 +5,6 @@ export default {
   stepBackward: '\ue9a4',
   stepForward: '\ue9a5',
   pause: '\ue890',
+  like: '\ue805',
+  star: '\ue839',
 };

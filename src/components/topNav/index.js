@@ -14,7 +14,7 @@ class Index extends Component {
   render() {
     // goBack
     return (
-      <View>
+      <View style={{...this.props.style}}>
         <StatusBar backgroundColor="transparent" translucent={true} />
         <View
           style={{

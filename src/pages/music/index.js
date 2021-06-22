@@ -40,7 +40,6 @@ class Index extends Component {
     const musicId = this.props.route.params.toString();
     console.log('id', musicId);
     this.setState({musicId: musicId});
-
     this.setState({showAni: true});
     this.getTrueMusicUrl(musicId);
     this.getMusicInformation(musicId);
