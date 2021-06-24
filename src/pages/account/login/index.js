@@ -41,10 +41,11 @@ class Login extends Component {
       if (success == true) {
         Toast.showText('登录成功');
         //  存储用户数据到 mobx中
+        console.log(res1.data);
         this.props.AccountStore.setUserInfo(
           phone,
           res1.data.token,
-          res1.data.id,
+          res1.data.user.id,
           res1.data.user.username,
           res1.data.user.nickname,
           res1.data.user.photo,
@@ -55,7 +56,7 @@ class Login extends Component {
           JSON.stringify({
             tel: phone,
             token: res1.data.token,
-            userId: res1.data.id,
+            userId: res1.data.user.id,
             username: res1.data.user.username,
             nickname: res1.data.user.nickname,
             photo: res1.data.user.photo,

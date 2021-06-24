@@ -8,4 +8,10 @@ export default {
   like: '\ue805',
   star: '\ue839',
   down: '\ue859',
+  right: '\ue856',
+  setting: '\ue7a3',
+  user: '\ue7ce',
+  phone: '\ue848',
+  infoCircle: '\ue783',
+  bulb: '\ue7fa',
 };

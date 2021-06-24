@@ -20,6 +20,7 @@ export default class App extends Component {
     // 获取缓存中的用户数据 手机本地
     const strUserInfo = await AsyncStorage.getItem('userinfo');
     const userinfo = strUserInfo ? JSON.parse(strUserInfo) : {};
+    console.log(userinfo);
     // 判断有没有token
     if (userinfo.token) {
       //TODO 把缓存中的数据存一份到mobx中

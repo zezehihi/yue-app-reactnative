@@ -27,7 +27,10 @@ const Api = {
    * 注册用户
    */
   REGISTER_USER: `${api}/user/registerUser`,
-
+  /**
+   * 获取用户信息
+   */
+  GET_USER_INFORMATION: `${api}/user/getUserInfo/:id`,
   /**
    * 获取新闻
    */

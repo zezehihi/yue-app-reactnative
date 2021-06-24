@@ -16,6 +16,7 @@ import Collect from '@/pages/collect';
 import SearchResult from '@/pages/searchResult';
 import Music from '@/pages/music';
 import Video from '@/pages/video';
+import SetMyInfo from '@/pages/my/setMyInfo';
 
 const Stack = createStackNavigator();
 
@@ -25,7 +26,7 @@ class Nav extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      initialRouteName: this.props.AccountStore.token ? 'TabBar' : 'Login',
+      initialRouteName: this.props.AccountStore.token ? 'SetMyInfo' : 'Login',
     };
   }
   render() {
@@ -46,6 +47,7 @@ class Nav extends Component {
           <Stack.Screen name="TabBar" component={TabBar} />
           <Stack.Screen name="Music" component={Music} />
           <Stack.Screen name="Video" component={Video} />
+          <Stack.Screen name="SetMyInfo" component={SetMyInfo} />
         </Stack.Navigator>
       </NavigationContainer>
     );

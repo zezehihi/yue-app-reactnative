@@ -12,6 +12,7 @@ class AccountStore {
   @observable photo = '';
 
   @action setUserInfo(tel, token, userId, username, nickname, photo) {
+    console.log(userId);
     this.userId = userId;
     this.tel = tel;
     this.token = token;
