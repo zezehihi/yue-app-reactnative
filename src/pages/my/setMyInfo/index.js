@@ -25,12 +25,20 @@ import TopNav from '@/components/topNav';
 import {NavigationContext} from '@react-navigation/native';
 import IconFont from '@/components/IconFont';
 import {observer, inject} from 'mobx-react';
+import ImagePicker from 'react-native-image-crop-picker';
 @inject('AccountStore')
 class Index extends Component {
   static contextType = NavigationContext;
   state = {user: ''};
   componentDidMount() {
     this.getUserInfo();
+    ImagePicker.openPicker({
+      width: 300,
+      height: 400,
+      cropping: true,
+    }).then(image => {
+      console.log(image);
+    });
   }
   getUserInfo = async () => {
     const {GET_USER_INFORMATION} = Api;
