@@ -30,7 +30,9 @@ class Index extends Component {
   updateSearch = search => {
     this.setState({search});
   };
-
+  constructor() {
+    super();
+  }
   componentDidMount() {
     this.getCarouselNews();
     this.getMusicList();
@@ -118,7 +120,7 @@ class Index extends Component {
                   style={styles.iconImage}
                 />
               </View>
-              <Text style={styles.iconText}>新曲</Text>
+              <Text style={styles.iconText}>视频</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.iconTouchableOpacity}>
               <View style={styles.iconContainer}>
@@ -138,7 +140,7 @@ class Index extends Component {
                   style={styles.iconImage}
                 />
               </View>
-              <Text style={styles.iconText}>伴奏</Text>
+              <Text style={styles.iconText}>戏曲</Text>
             </TouchableOpacity>
           </View>
           {/*  */}

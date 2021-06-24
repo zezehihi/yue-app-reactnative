@@ -104,7 +104,9 @@ class TabBar extends Component {
           {
             title: '首页',
             onPress: () => {
-              this.setState({tab2: <Index />});
+              this.setState({
+                tab2: <Index showActionPopover={this.showActionPopover} />,
+              });
             },
           },
           {
@@ -123,28 +125,6 @@ class TabBar extends Component {
         ];
         key = ActionPopover.show(
           {x: 80, y: pxToDpH(1350), width: 200, height: 200},
-          items,
-          options,
-        );
-        break;
-      }
-      case 'tab3': {
-        items = [
-          {
-            title: '我的',
-            onPress: () => {
-              this.setState({tab3: <My />});
-            },
-          },
-          {
-            title: '退出',
-            onPress: () => {
-              this.setState({tab3: <Message />});
-            },
-          },
-        ];
-        key = ActionPopover.show(
-          {x: 160, y: pxToDpH(1350), width: 200, height: 200},
           items,
           options,
         );
@@ -193,7 +173,7 @@ class TabBar extends Component {
           selectedTitleStyle={{color: '#3075ab'}}
           selected={this.state.selectedTab === 'tab3'}
           title="我的"
-          onPress={() => this.showActionPopover('tab3')}>
+          onPress={() => this.setState({selectedTab: 'tab3'})}>
           {tab3}
         </TabNavigator.Item>
       </TabNavigator>
