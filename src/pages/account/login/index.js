@@ -63,7 +63,7 @@ class Login extends Component {
           }),
         );
 
-        this.props.navigation.navigate('Index');
+        this.props.navigation.navigate('TabBar');
       } else {
         this.props.navigation.navigate('Register', phone);
       }
