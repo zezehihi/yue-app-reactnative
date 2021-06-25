@@ -123,7 +123,6 @@ class Index extends Component {
               name="like"
               style={{color: '#a0acb4', fontSize: pxToDpW(110)}}
             />
-            <Text style={{color: '#a0acb4', fontSize: pxToDpW(60)}}>0</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={{
@@ -136,7 +135,6 @@ class Index extends Component {
               name="star"
               style={{color: '#a0acb4', fontSize: pxToDpW(110)}}
             />
-            <Text style={{color: '#a0acb4', fontSize: pxToDpW(60)}}>0</Text>
           </TouchableOpacity>
         </View>
       </View>

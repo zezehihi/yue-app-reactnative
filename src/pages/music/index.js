@@ -207,6 +207,36 @@ class Index extends Component {
               />
             </TouchableOpacity> */}
           </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+              paddingTop: pxToDpH(100),
+            }}>
+            <TouchableOpacity
+              style={{
+                flexDirection: 'column',
+                alignItems: 'center',
+                width: pxToDpW(200),
+              }}>
+              <IconFont
+                name="like"
+                style={{color: '#a0acb4', fontSize: pxToDpW(80)}}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                flexDirection: 'column',
+                alignItems: 'center',
+                width: pxToDpW(200),
+                justifyContent: 'space-around',
+              }}>
+              <IconFont
+                name="star"
+                style={{color: '#a0acb4', fontSize: pxToDpW(80)}}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
       </ImageBackground>
     );

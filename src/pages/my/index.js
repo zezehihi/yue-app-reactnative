@@ -15,16 +15,13 @@ import AsyncStorage from '@react-native-community/async-storage';
 import {color, pxToDpH, pxToDpW, layout, size} from '@/MyStyle';
 import {Divider} from 'react-native-elements';
 import {Carousel} from 'teaset';
+import {Primary} from '@/components/button';
 import SearchBar from '@/components/searchBar';
 import Api from '@/api/api';
 import request from '@/services/request';
-import SoundPlayer from 'react-native-sound-player';
-import {BlurView, VibrancyView} from '@react-native-community/blur';
-import Slider from '@react-native-community/slider';
-import TopNav from '@/components/topNav';
+import {ActionSheet, Toast} from 'teaset';
 import IconFont from '@/components/IconFont';
 import {observer, inject} from 'mobx-react';
-import Video from 'react-native-video';
 import {NavigationContext} from '@react-navigation/native';
 @inject('AccountStore')
 class Index extends Component {
@@ -43,6 +40,25 @@ class Index extends Component {
     );
     const res = await request.get(url);
     this.setState({user: res.data.user}, () => console.log(this.state.user));
+  };
+  loginOut = async () => {
+    const tmplogout = async () => {
+      console.log('执行退出');
+      // 清除缓存
+      await AsyncStorage.removeItem('userinfo');
+      // 清除用户数据
+      this.props.AccountStore.clearUserInfo();
+      // 清除token数据
+
+      Toast.smile('退出成功', 2000);
+
+      setTimeout(() => {
+        this.context.navigate('Login');
+      }, 2000);
+    };
+
+    const opts = [{title: '退出', onPress: tmplogout}];
+    ActionSheet.show(opts, {title: '取消'});
   };
   render() {
     const {user} = this.state;
@@ -89,6 +105,16 @@ class Index extends Component {
               style={{color: '#1b7eb2', fontSize: size.font1}}
             />
           </TouchableOpacity>
+        </View>
+        {/* 其他按钮 */}
+        <View style={{justifyContent: 'center', flexDirection: 'row'}}>
+          <Primary
+            style={{marginTop: pxToDpH(200)}}
+            width={pxToDpW(900)}
+            height={pxToDpH(180)}
+            onPress={this.loginOut}>
+            退出
+          </Primary>
         </View>
       </View>
     );
