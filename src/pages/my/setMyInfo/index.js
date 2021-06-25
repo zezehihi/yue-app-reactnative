@@ -14,7 +14,7 @@ import {
 import AsyncStorage from '@react-native-community/async-storage';
 import {color, pxToDpH, pxToDpW, layout, size} from '@/MyStyle';
 import {Divider} from 'react-native-elements';
-import {ActionSheet} from 'teaset';
+import {ActionSheet, Toast} from 'teaset';
 import SearchBar from '@/components/searchBar';
 import Api from '@/api/api';
 import request from '@/services/request';
@@ -32,13 +32,6 @@ class Index extends Component {
   state = {user: ''};
   componentDidMount() {
     this.getUserInfo();
-    ImagePicker.openPicker({
-      width: 300,
-      height: 400,
-      cropping: true,
-    }).then(image => {
-      console.log(image);
-    });
   }
   getUserInfo = async () => {
     const {GET_USER_INFORMATION} = Api;
@@ -49,10 +42,49 @@ class Index extends Component {
     const res = await request.get(url);
     this.setState({user: res.data.user}, () => console.log(this.state.user));
   };
+  updateUserInfo = async (select, data) => {
+    const {user} = this.state;
+    const {UPDATE_USER_INFORMATION} = Api;
+    const params = {
+      select,
+      data,
+      id: user.id,
+    };
+    const res = await request.post(UPDATE_USER_INFORMATION, params);
+    const {success} = res.data;
+    if (success == true) {
+      Toast.success('更新成功');
+      this.getUserInfo();
+    } else {
+      Toast.sad('更新失败');
+    }
+  };
   selectUpdateAvatar = () => {
-    let items = [{title: '上传头像', onPress: () => alert('Hello')}];
+    let items = [{title: '上传头像', onPress: this.uploadAvatar}];
     let cancelItem = {title: '取消'};
     ActionSheet.show(items, cancelItem);
+  };
+
+  uploadAvatar = async () => {
+    const image = await ImagePicker.openPicker({
+      width: 300,
+      height: 400,
+      cropping: true,
+    });
+    let formData = new FormData();
+    formData.append('file', {
+      uri: image.path,
+      type: image.mime,
+      name: image.path.split('/').pop(),
+    });
+    const {FILE_UPLOAD_AVATARS} = Api;
+    const res = await request.post(FILE_UPLOAD_AVATARS, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    const ImageUri = res.data.url;
+    this.updateUserInfo(0, ImageUri);
   };
 
   render() {
