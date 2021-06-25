@@ -19,7 +19,7 @@ import Store from '@/pages/store';
 import Message from '@/pages/message';
 import YueJu from '@/pages/yueju';
 import Collect from '@/pages/collect';
-
+import IconFont from '@/components/IconFont';
 import {ActionPopover} from 'teaset';
 import {black} from 'chalk';
 
@@ -27,7 +27,7 @@ class TabBar extends Component {
   constructor(props) {
     super(props);
     // selectedTab: "group",
-    let selectedTab = 'tab1';
+    let selectedTab = 'index';
     if (this.props.route.params && this.props.route.params.pagename) {
       selectedTab = this.props.route.params.pagename;
     }
@@ -51,91 +51,9 @@ class TabBar extends Component {
     this.setState({selectedTab: curTab});
   };
 
-  show(curTab) {
-    let items = [];
-    let key = '';
-    let options = {
-      direction: 'down',
-      popoverStyle: {
-        backgroundColor: '#faf7fa',
-        elevation: 10,
-        shadowColor: '#888888',
-        borderBottomWidth: 1,
-        borderColor: '#cccccc',
-      },
-      showArrow: false,
-      style: {
-        elevation: 10,
-        shadowColor: '#888888',
-      },
-    };
-    switch (curTab) {
-      case 'tab1': {
-        items = [
-          {
-            title: '消息',
-            onPress: () => {
-              this.setState({tab1: <Message />});
-            },
-          },
-          {
-            title: '收藏',
-            onPress: () => {
-              this.setState({tab1: <Collect />});
-            },
-          },
-          {
-            title: '动态',
-            onPress: () => {
-              this.setState({tab1: <Message />});
-            },
-          },
-        ];
-
-        key = ActionPopover.show(
-          {x: 10, y: pxToDpH(1350), width: 200, height: 200},
-          items,
-          options,
-        );
-        break;
-      }
-      case 'tab2': {
-        items = [
-          {
-            title: '首页',
-            onPress: () => {
-              this.setState({
-                tab2: <Index showActionPopover={this.showActionPopover} />,
-              });
-            },
-          },
-          {
-            title: '戏曲',
-            onPress: () => {
-              this.setState({tab2: <YueJu />});
-            },
-          },
-          {
-            title: '商城',
-            onPress: () => {
-              this.setState({tab2: <Message />});
-            },
-          },
-          {title: '设置', onPress: () => alert('设置')},
-        ];
-        key = ActionPopover.show(
-          {x: 80, y: pxToDpH(1350), width: 200, height: 200},
-          items,
-          options,
-        );
-        break;
-      }
-    }
-    return key;
-  }
   componentDidMount() {}
   render() {
-    const {tab1, tab2, tab3} = this.state;
+    const {tab1, tab2, selectedTab} = this.state;
     return (
       <TabNavigator
         tabBarUnderlineStyle={{borderWidth: 0}}
@@ -153,28 +71,28 @@ class TabBar extends Component {
         }}
         tabBarShadowStyle={{backgroundColor: 'transparent'}}>
         <TabNavigator.Item
+          selected={selectedTab === 'message'}
           titleStyle={{fontSize: size.font3}}
           selectedTitleStyle={{color: '#3075ab'}}
-          selected={this.state.selectedTab === 'tab1'}
-          title="消息"
-          onPress={() => this.showActionPopover('tab1')}>
-          {tab1}
+          onPress={() => this.setState({selectedTab: 'message'})}
+          title="消息">
+          <Message />
         </TabNavigator.Item>
         <TabNavigator.Item
+          selected={selectedTab === 'index'}
           titleStyle={{fontSize: size.font3}}
           selectedTitleStyle={{color: '#3075ab'}}
-          selected={this.state.selectedTab === 'tab2'}
-          title="戏剧"
-          onPress={() => this.showActionPopover('tab2')}>
-          {tab2}
+          onPress={() => this.setState({selectedTab: 'index'})}
+          title="戏剧">
+          <Index />
         </TabNavigator.Item>
         <TabNavigator.Item
+          selected={selectedTab === 'my'}
+          onPress={() => this.setState({selectedTab: 'my'})}
           titleStyle={{fontSize: size.font3}}
           selectedTitleStyle={{color: '#3075ab'}}
-          selected={this.state.selectedTab === 'tab3'}
-          title="我的"
-          onPress={() => this.setState({selectedTab: 'tab3'})}>
-          {tab3}
+          title="我的">
+          <My />
         </TabNavigator.Item>
       </TabNavigator>
     );

@@ -14,22 +14,25 @@ import {
 import AsyncStorage from '@react-native-community/async-storage';
 import {color, pxToDpH, pxToDpW, layout, size} from '@/MyStyle';
 import {Divider} from 'react-native-elements';
-import {ActionSheet, Toast} from 'teaset';
+import {ActionSheet, Toast, Overlay} from 'teaset';
 import SearchBar from '@/components/searchBar';
 import Api from '@/api/api';
 import request from '@/services/request';
-import SoundPlayer from 'react-native-sound-player';
-import {BlurView, VibrancyView} from '@react-native-community/blur';
-import {ListItem, Avatar} from 'react-native-elements';
+import {Isao} from 'react-native-textinput-effects';
+import {ListItem, Avatar, Button} from 'react-native-elements';
 import TopNav from '@/components/topNav';
 import {NavigationContext} from '@react-navigation/native';
+import {Primary} from '@/components/button';
 import IconFont from '@/components/IconFont';
 import {observer, inject} from 'mobx-react';
 import ImagePicker from 'react-native-image-crop-picker';
 @inject('AccountStore')
 class Index extends Component {
   static contextType = NavigationContext;
-  state = {user: ''};
+  state = {
+    user: '',
+    inputData: '',
+  };
   componentDidMount() {
     this.getUserInfo();
   }
@@ -86,7 +89,60 @@ class Index extends Component {
     const ImageUri = res.data.url;
     this.updateUserInfo(0, ImageUri);
   };
-
+  showOverlay = (data, select) => {
+    const {inputData} = this.state;
+    let overlayViewRef = null;
+    let overlayView = (
+      <Overlay.PopView
+        ref={v => (overlayViewRef = v)}
+        style={{alignItems: 'center', justifyContent: 'center'}}>
+        <View
+          style={{
+            backgroundColor: '#fff',
+            minWidth: pxToDpW(900),
+            minHeight: pxToDpH(550),
+            borderRadius: 15,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <Isao
+            activeColor={color.topColorBlue}
+            borderHeight={4}
+            inputPadding={16}
+            labelHeight={24}
+            passiveColor={color.mutedGray}
+            labelStyle={{
+              fontWeight: 'normal',
+            }}
+            inputStyle={{
+              backgroundColor: color.inputColor,
+              elevation: 10,
+              shadowColor: '#888888',
+              color: color.mutedGray,
+              fontWeight: 'normal',
+            }}
+            style={{
+              marginTop: pxToDpH(100),
+              marginBottom: pxToDpH(110),
+              width: pxToDpW(700),
+            }}
+            defaultValue={data}
+            onChangeText={text => this.setState({inputData: text})}
+          />
+          <Button
+            title="确定"
+            type="Outline"
+            buttonStyle={{marginTop: 0}}
+            onPress={() => {
+              this.updateUserInfo(select, this.state.inputData);
+              overlayViewRef.close();
+            }}
+          />
+        </View>
+      </Overlay.PopView>
+    );
+    Overlay.show(overlayView);
+  };
   render() {
     const {user} = this.state;
     return (
@@ -103,24 +159,31 @@ class Index extends Component {
           </ListItem.Content>
           <ListItem.Chevron />
         </ListItem>
-        <ListItem bottomDivider>
+        <ListItem
+          bottomDivider
+          onPress={() => this.showOverlay(user.nickname, 2)}>
           <IconFont name="user" style={{color: '#cccccc'}} />
           <ListItem.Content>
             <ListItem.Title>{user.nickname}</ListItem.Title>
+            <ListItem.Subtitle>昵称</ListItem.Subtitle>
           </ListItem.Content>
           <ListItem.Chevron />
         </ListItem>
-        <ListItem bottomDivider>
+        <ListItem
+          bottomDivider
+          onPress={() => this.showOverlay(user.username, 1)}>
           <IconFont name="infoCircle" style={{color: '#cccccc'}} />
           <ListItem.Content>
             <ListItem.Title>{user.username}</ListItem.Title>
+            <ListItem.Subtitle>用户名</ListItem.Subtitle>
           </ListItem.Content>
           <ListItem.Chevron />
         </ListItem>
-        <ListItem bottomDivider>
+        <ListItem bottomDivider onPress={() => this.showOverlay(user.tel, 4)}>
           <IconFont name="phone" style={{color: '#cccccc'}} />
           <ListItem.Content>
             <ListItem.Title>{user.tel}</ListItem.Title>
+            <ListItem.Subtitle>手机号</ListItem.Subtitle>
           </ListItem.Content>
           <ListItem.Chevron />
         </ListItem>
