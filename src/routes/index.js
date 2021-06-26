@@ -17,6 +17,7 @@ import SearchResult from '@/pages/searchResult';
 import Music from '@/pages/music';
 import Video from '@/pages/video';
 import SetMyInfo from '@/pages/my/setMyInfo';
+import NewsDetail from '@/pages/news/newsDetail';
 
 const Stack = createStackNavigator();
 
@@ -48,6 +49,7 @@ class Nav extends Component {
           <Stack.Screen name="Music" component={Music} />
           <Stack.Screen name="Video" component={Video} />
           <Stack.Screen name="SetMyInfo" component={SetMyInfo} />
+          <Stack.Screen name="NewsDetail" component={NewsDetail} />
         </Stack.Navigator>
       </NavigationContainer>
     );

@@ -23,7 +23,10 @@ import {BlurView, VibrancyView} from '@react-native-community/blur';
 import TopNav from '@/components/topNav';
 import IconFont from '@/components/IconFont';
 import {observer} from 'mobx-react';
+import {NavigationContext} from '@react-navigation/native';
+@observer
 class Index extends Component {
+  static contextType = NavigationContext;
   state = {
     news: '',
   };
@@ -44,14 +47,19 @@ class Index extends Component {
         {news.length != 0 ? (
           news.map((v, i) => (
             <TouchableOpacity
-              onPress={() => this.context.navigate(Type, id)}
+              onPress={() => this.context.navigate('NewsDetail', v)}
               key={i}
               style={{
                 padding: size.globalPadding,
                 paddingBottom: pxToDpH(10),
                 paddingTop: pxToDpH(10),
               }}>
-              <Text style={{color: '#256ec0', fontSize: pxToDpW(44)}}>
+              <Text
+                style={{
+                  color: '#256ec0',
+                  fontSize: pxToDpW(44),
+                  paddingBottom: pxToDpH(30),
+                }}>
                 {v.title}
               </Text>
               <View
@@ -60,13 +68,13 @@ class Index extends Component {
                 }}>
                 <Image
                   source={{uri: v.newsimages[0].photolink}}
-                  style={{width: pxToDpW(400), height: pxToDpH(300)}}
+                  style={{width: pxToDpW(300), height: pxToDpH(250)}}
                 />
                 <View
                   style={{
                     paddingLeft: pxToDpW(60),
                     paddingRight: pxToDpW(60),
-                    width: pxToDpW(600),
+                    width: pxToDpW(700),
                   }}>
                   <Text style={{color: '#6b7a85', fontSize: size.font2}}>
                     {v.summary.length > 40
