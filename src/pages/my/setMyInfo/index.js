@@ -149,6 +149,7 @@ class Index extends Component {
       <View
         style={{
           padding: size.globalPadding,
+          paddingTop: 0,
         }}>
         <StatusBar backgroundColor={'transparent'} translucent={true} />
         <TopNav />
