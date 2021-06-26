@@ -16,7 +16,7 @@ import ScrollableTabView, {
 import Index from '@/pages/index';
 import My from '@/pages/my';
 import Store from '@/pages/store';
-import Message from '@/pages/message';
+import News from '@/pages/news';
 import YueJu from '@/pages/yueju';
 import Collect from '@/pages/collect';
 import IconFont from '@/components/IconFont';
@@ -35,9 +35,6 @@ class TabBar extends Component {
   }
   state = {
     selectedTab: '',
-    tab1: <Message />,
-    tab2: <YueJu />,
-    tab3: <My />,
     curAction: '',
   };
 
@@ -75,8 +72,8 @@ class TabBar extends Component {
           titleStyle={{fontSize: size.font3}}
           selectedTitleStyle={{color: '#3075ab'}}
           onPress={() => this.setState({selectedTab: 'message'})}
-          title="消息">
-          <Message />
+          title="资讯">
+          <News />
         </TabNavigator.Item>
         <TabNavigator.Item
           selected={selectedTab === 'index'}

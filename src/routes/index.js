@@ -10,7 +10,7 @@ import BottomBar from '@/pages/bottomBar';
 import TabBar from '@/pages/tabBar';
 import My from '@/pages/my';
 import Store from '@/pages/store';
-import Message from '@/pages/message';
+import News from '@/pages/news';
 import YueJu from '@/pages/yueju';
 import Collect from '@/pages/collect';
 import SearchResult from '@/pages/searchResult';
@@ -26,7 +26,7 @@ class Nav extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      initialRouteName: this.props.AccountStore.token ? 'TabBar' : 'Login',
+      initialRouteName: this.props.AccountStore.token ? 'News' : 'Login',
     };
   }
   render() {
@@ -40,7 +40,7 @@ class Nav extends Component {
           <Stack.Screen name="BottomBar" component={BottomBar} />
           <Stack.Screen name="My" component={My} />
           <Stack.Screen name="Store" component={Store} />
-          <Stack.Screen name="Message" component={Message} />
+          <Stack.Screen name="News" component={News} />
           <Stack.Screen name="YueJu" component={YueJu} />
           <Stack.Screen name="Collect" component={Collect} />
           <Stack.Screen name="SearchResult" component={SearchResult} />

@@ -1,6 +1,7 @@
 const mockApi = '/mockApi';
-const BASE_URI = 'http://172.20.10.9:8809';
+// const BASE_URI = 'http://172.20.10.9:8809';
 //const BASE_URI = 'http://localhost:8809';
+const BASE_URI = 'http://192.168.0.105:8809';
 const MUSIC_URI = 'https://cloudmusic.1dtfc.com';
 const FILE_URI = 'http://yun.1dtfc.com';
 const api = BASE_URI + '/yue';
