@@ -66,15 +66,18 @@ class Index extends Component {
                 style={{
                   flexDirection: 'row',
                 }}>
-                <Image
-                  source={{uri: v.newsimages[0].photolink}}
-                  style={{width: pxToDpW(300), height: pxToDpH(250)}}
-                />
+                {v.newsimages[0].photolink != null && (
+                  <Image
+                    source={{uri: v.newsimages[0].photolink}}
+                    style={{width: pxToDpW(300), height: pxToDpH(250)}}
+                  />
+                )}
                 <View
                   style={{
                     paddingLeft: pxToDpW(60),
                     paddingRight: pxToDpW(60),
-                    width: pxToDpW(700),
+                    width:
+                      v.newsimages[0].photolink != null ? pxToDpW(730) : '100%',
                   }}>
                   <Text style={{color: '#6b7a85', fontSize: size.font2}}>
                     {v.summary.length > 40
