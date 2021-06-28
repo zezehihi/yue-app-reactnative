@@ -28,7 +28,7 @@ class Nav extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      initialRouteName: this.props.AccountStore.token ? 'NewsDetail' : 'Login',
+      initialRouteName: this.props.AccountStore.token ? 'TabBar' : 'Login',
     };
   }
   render() {

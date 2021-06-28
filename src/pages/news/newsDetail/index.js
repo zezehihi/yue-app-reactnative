@@ -24,53 +24,8 @@ import {observer, inject} from 'mobx-react';
 @inject('AccountStore')
 class Index extends Component {
   state = {
-    // news: '',
-    news: {
-      id: 1,
-      title: '越剧《核桃树之恋》即将亮相北京、杭州，献礼建党百年',
-      deploytime: '2021-06-25T19:34:34.000+00:00',
-      authorid: 1,
-      summary:
-        '近日，原创越剧现代戏《核桃树之恋》在杭州蝴蝶剧场完成了内部彩排汇报，全体演职人员以饱满充沛的精神全面展示了最新创排成果，为7月赴北京参加由中共中央宣传部、文化和旅游部、中国文学艺术界联合会联合举办的“庆祝中国共产党成立100周年优秀舞台艺术作品展演”及浙江省庆祝建党百年百场舞台艺术作品展演做好积极筹备工作。',
-      content:
-        '近日，原创越剧现代戏《核桃树之恋》在杭州蝴蝶剧场完成了内部彩排汇报，全体演职人员以饱满充沛的精神全面展示了最新创排成果，为7月赴北京参加由中共中央宣传部、文化和旅游部、中国文学艺术界联合会联合举办的“庆祝中国共产党成立100周年优秀舞台艺术作品展演”及浙江省庆祝建党百年百场舞台艺术作品展演做好积极筹备工作。<skn>越剧《核桃树之恋》（合作版）由中共嵊州市委宣传部、嵊州市文化广电旅游局、浙江小百花越剧院出品，浙江小百花越剧院（浙江越剧团）、嵊州市越剧艺术保护传承中心（嵊州越剧团）联合演出。该剧根据嵊州市仙人坑村的真人真事进行创作，讲述了新中国“两弹一星”时代，一位核弹技术员与妻子之间平凡而又动人的爱情故事。全剧以小见大，将个人情爱与国家大爱紧密相连，艺术再现了共和国历史上忘一己之名、舍一己之利，为人民谋幸福、为民族谋复兴的“无名之辈”，描绘出一代科研工作者为新中国国防科技事业奉献一生的担当和责任，从小处窥见祖国的繁荣富强之梦。<skn>越剧《核桃树之恋》讲述的是一位核弹技术员与妻子之间平凡而又动人的爱情故事。<skn>根据嵊州仙人坑村的真人真事为素材进行创作，以核弹技术员妻子的视角和心路历程，展示出一群可歌可泣、可敬可爱的核弹技术员及他们的家人们的牺牲与奉献精神；以温馨浪漫的笔触，书写出一代无名英雄们的强国之梦。<skn>此剧可称之为“小故事、大情怀”，个人情爱与国家大爱紧密相连。她如泛着黄色的老照片，帮我们打开一段尘封的历史；以怀旧的文艺片风格为底色，再现一段逝去的峥嵘岁月。',
-      numpictures: 3,
-      newsimages: [
-        {
-          id: 1,
-          newsid: 1,
-          photonum: 1,
-          photolink:
-            'https://yun.1dtfc.com/yue/newsImages/aa18972bd40735faa50b870b7072babb0e2408b1.jpg',
-          phototitle: null,
-          photodesc: null,
-        },
-        {
-          id: 1,
-          newsid: 1,
-          photonum: 2,
-          photolink:
-            'https://yun.1dtfc.com/yue/newsImages/b58f8c5494eef01f5f4aa7ed11dd2c2dbc317d6c.jpg',
-          phototitle: null,
-          photodesc: null,
-        },
-        {
-          id: 1,
-          newsid: 1,
-          photonum: 3,
-          photolink:
-            'https://yun.1dtfc.com/yue/newsImages/ca1349540923dd544cce77553f2a06d69c82487e.jpg',
-          phototitle: null,
-          photodesc: null,
-        },
-      ],
-      author: {
-        id: 1,
-        authorname: '浙里有艺事',
-        authoravatar:
-          'https://yun.1dtfc.com/yue/authorAvatars/uc.101.b0b728e8.jpg',
-      },
-    },
+    news: '',
+
     inputComment: '',
     showModal: true,
     comments: '',
@@ -79,12 +34,8 @@ class Index extends Component {
     super();
     this.overlayViewRef = null;
   }
-  componentDidMount() {
-    //this.getNews();
-    // this.setState({news: this.props.route.params}, () =>
-    //   console.log(this.state.news),
-    // );
-    this.getCommentList();
+  async componentDidMount() {
+    this.setState({news: this.props.route.params}, () => this.getCommentList());
   }
   getCommentList = async () => {
     const {ACTION_GET_COMMENT_LIST} = Api;
@@ -256,12 +207,9 @@ class Index extends Component {
         </View>
 
         <Divider
+          orientation="vertical"
           width={5}
-          style={{
-            marginBottom: pxToDpH(20),
-            marginTop: pxToDpH(20),
-            width: pxToDpW(560),
-          }}
+          style={{marginBottom: pxToDpH(20), marginTop: pxToDpH(20)}}
         />
       </View>
     ));
