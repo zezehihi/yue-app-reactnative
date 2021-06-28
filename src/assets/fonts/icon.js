@@ -14,4 +14,5 @@ export default {
   phone: '\ue848',
   infoCircle: '\ue783',
   bulb: '\ue7fa',
+  starFill: '\ue90e',
 };

@@ -14,7 +14,7 @@ import {
 import AsyncStorage from '@react-native-community/async-storage';
 import {color, pxToDpH, pxToDpW, layout, size} from '@/MyStyle';
 import {Divider} from 'react-native-elements';
-import {Carousel} from 'teaset';
+import {Carousel, Toast} from 'teaset';
 import SearchBar from '@/components/searchBar';
 import Swiper from '@/pages/index/components/swiper';
 import Api from '@/api/api';
@@ -24,13 +24,13 @@ import {BlurView, VibrancyView} from '@react-native-community/blur';
 import Slider from '@react-native-community/slider';
 import TopNav from '@/components/topNav';
 import IconFont from '@/components/IconFont';
-import {observer} from 'mobx-react';
+import {observer, inject} from 'mobx-react';
 import Video from 'react-native-video';
 import Orientation from 'react-native-orientation-locker';
 
 const w = Dimensions.get('window').width;
 const h = Dimensions.get('window').height;
-@observer
+@inject('AccountStore')
 class Index extends Component {
   state = {
     loading: true,
@@ -42,6 +42,7 @@ class Index extends Component {
       Orientation.getInitialOrientation() == 'PORTRAIT' ? false : true,
     isShowMenu: true,
     slideValue: 0.0,
+    isCollect: false,
   };
   async componentDidMount() {
     const videoId = this.props.route.params.toString();
@@ -51,6 +52,7 @@ class Index extends Component {
     this.setState({isFullScreen: true});
     this.getVideoInformation(videoId);
     this.getVideoUrl(videoId);
+    this.getCollectState(videoId);
   }
 
   getVideoInformation = async videoId => {
@@ -67,6 +69,15 @@ class Index extends Component {
     this.setState({videoUrl: res.data.urls[0]});
     console.log(this.state.videoUrl);
   };
+  getCollectState = async videoId => {
+    const {ACTION_GET_COLLECT_STATE} = Api;
+    const url = ACTION_GET_COLLECT_STATE.replace(
+      ':userId',
+      this.props.AccountStore.userId,
+    ).replace(':mvId', videoId);
+    const res = await request.get(url);
+    this.setState({isCollect: res.data.success});
+  };
   formatTime = second => {
     let h = 0,
       i = 0,
@@ -81,8 +92,26 @@ class Index extends Component {
     };
     return [zero(h), zero(i), zero(s)].join(':');
   };
+  onCollectPress = async () => {
+    const {videoId, isCollect} = this.state;
+    const uerId = this.props.AccountStore.userId;
+    const {ACTION_COLLECT} = Api;
+    const params = {
+      add: !isCollect,
+      mvId: videoId,
+      type: 1014,
+      userId: uerId,
+    };
+    const res = await request.post(ACTION_COLLECT, params);
+    this.setState({isCollect: res.data.success});
+    if (isCollect) {
+      Toast.success('收藏成功', 2000);
+    } else {
+      Toast.success('取消收藏成功', 2000);
+    }
+  };
   yView = () => {
-    const {video} = this.state;
+    const {video, isCollect} = this.state;
     return (
       <View style={{marginTop: pxToDpH(30), marginBottom: pxToDpH(30)}}>
         <View>
@@ -125,6 +154,7 @@ class Index extends Component {
             />
           </TouchableOpacity>
           <TouchableOpacity
+            onPress={this.onCollectPress}
             style={{
               flexDirection: 'column',
               alignItems: 'center',
@@ -132,7 +162,7 @@ class Index extends Component {
               justifyContent: 'space-around',
             }}>
             <IconFont
-              name="star"
+              name={isCollect != false ? 'starFill' : 'star'}
               style={{color: '#a0acb4', fontSize: pxToDpW(110)}}
             />
           </TouchableOpacity>

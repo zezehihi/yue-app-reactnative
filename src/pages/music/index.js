@@ -21,8 +21,8 @@ import SoundPlayer from 'react-native-sound-player';
 import {BlurView, VibrancyView} from '@react-native-community/blur';
 import TopNav from '@/components/topNav';
 import IconFont from '@/components/IconFont';
-import {observer} from 'mobx-react';
-@observer
+import {inject} from 'mobx-react';
+@inject('AccountStore')
 class Index extends Component {
   state = {
     musicId: '',
@@ -35,6 +35,7 @@ class Index extends Component {
     //看效果是什么
     rotateValue: new Animated.Value(0), //旋转角度的初始值
     showAni: false,
+    isCollect: false,
   };
   async componentDidMount() {
     const musicId = this.props.route.params.toString();
@@ -43,12 +44,40 @@ class Index extends Component {
     this.setState({showAni: true});
     this.getTrueMusicUrl(musicId);
     this.getMusicInformation(musicId);
+    this.getCollectState(musicId);
   }
   componentWillUnmount() {
     this.setState({showAni: false});
     this.stopAnimation();
     SoundPlayer.stop();
   }
+  getCollectState = async musicId => {
+    const {ACTION_GET_COLLECT_STATE} = Api;
+    const url = ACTION_GET_COLLECT_STATE.replace(
+      ':userId',
+      this.props.AccountStore.userId,
+    ).replace(':mvId', musicId);
+    const res = await request.get(url);
+    this.setState({isCollect: res.data.success});
+  };
+  onCollectPress = async () => {
+    const {musicId, isCollect} = this.state;
+    const uerId = this.props.AccountStore.userId;
+    const {ACTION_COLLECT} = Api;
+    const params = {
+      add: !isCollect,
+      mvId: musicId,
+      type: 1,
+      userId: uerId,
+    };
+    const res = await request.post(ACTION_COLLECT, params);
+    this.setState({isCollect: res.data.success});
+    if (isCollect) {
+      Toast.success('收藏成功', 2000);
+    } else {
+      Toast.success('取消收藏成功', 2000);
+    }
+  };
   stopAnimation = () => {
     this.state.rotateValue.stopAnimation();
     this.state.bounceValue.stopAnimation();
@@ -138,7 +167,7 @@ class Index extends Component {
     }
   };
   renderMusic() {
-    const {music, musicPic, loading, musicUrl, musicState} = this.state;
+    const {music, musicPic, loading, isCollect, musicState} = this.state;
 
     return (
       <ImageBackground source={{uri: musicPic}} style={styles.container}>
@@ -225,6 +254,7 @@ class Index extends Component {
               />
             </TouchableOpacity>
             <TouchableOpacity
+              onPress={this.onCollectPress}
               style={{
                 flexDirection: 'column',
                 alignItems: 'center',
@@ -232,7 +262,7 @@ class Index extends Component {
                 justifyContent: 'space-around',
               }}>
               <IconFont
-                name="star"
+                name={isCollect != false ? 'starFill' : 'star'}
                 style={{color: '#a0acb4', fontSize: pxToDpW(80)}}
               />
             </TouchableOpacity>
