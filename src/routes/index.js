@@ -21,6 +21,10 @@ import Collect from '@/pages/my/collect';
 import Video from '@/pages/video';
 import Music from '@/pages/music';
 import MyComments from '@/pages/my/myComments';
+import Share from '@/pages/share';
+import Newest from '@/pages/share/newest';
+import Publish from '@/pages/share/publish';
+
 const Stack = createStackNavigator();
 
 @inject('AccountStore')
@@ -55,6 +59,9 @@ class Nav extends Component {
           <Stack.Screen name="Video" component={Video} />
           <Stack.Screen name="Music" component={Music} />
           <Stack.Screen name="MyComments" component={MyComments} />
+          <Stack.Screen name="Share" component={Share} />
+          <Stack.Screen name="Newest" component={Newest} />
+          <Stack.Screen name="Publish" component={Publish} />
         </Stack.Navigator>
       </NavigationContainer>
     );

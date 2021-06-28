@@ -124,7 +124,9 @@ class Index extends Component {
               </View>
               <Text style={styles.iconText}>视频</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.iconTouchableOpacity}>
+            <TouchableOpacity
+              style={styles.iconTouchableOpacity}
+              onPress={() => this.context.navigate('News')}>
               <View style={styles.iconContainer}>
                 <Image
                   source={require('@/assets/images/icons/news.png')}

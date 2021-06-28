@@ -43,6 +43,13 @@ class Index extends Component {
     return (
       <ScrollView>
         <StatusBar backgroundColor={'transparent'} translucent={true} />
+        <TopNav
+          title="资讯"
+          style={{
+            paddingLeft: size.globalPadding,
+            paddingRight: size.globalPadding,
+          }}
+        />
         {news.length != 0 && (
           <View
             style={{

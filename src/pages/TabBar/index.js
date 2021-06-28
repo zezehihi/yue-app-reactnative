@@ -21,6 +21,7 @@ import YueJu from '@/pages/yueju';
 import IconFont from '@/components/IconFont';
 import {ActionPopover} from 'teaset';
 import {black} from 'chalk';
+import Share from '@/pages/share';
 
 class TabBar extends Component {
   constructor(props) {
@@ -91,8 +92,8 @@ class TabBar extends Component {
             titleStyle={{fontSize: size.font3}}
             selectedTitleStyle={{color: '#3075ab'}}
             onPress={() => this.setState({selectedTab: 'message'})}
-            title="资讯">
-            <News />
+            title="动态">
+            <Share />
           </TabNavigator.Item>
           <TabNavigator.Item
             selected={selectedTab === 'index'}
