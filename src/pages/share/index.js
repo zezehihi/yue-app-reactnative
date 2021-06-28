@@ -22,6 +22,13 @@ import {BlurView, VibrancyView} from '@react-native-community/blur';
 import TopNav from '@/components/topNav';
 import IconFont from '@/components/IconFont';
 import {observer} from 'mobx-react';
+import Newest from '@/pages/share/newest';
+import Publish from '@/pages/share/publish';
+import CustomerBar from '@/pages/share/components/CustomerBar';
+
+import ScrollableTabView, {
+  DefaultTabBar,
+} from 'react-native-scrollable-tab-view';
 import {NavigationContext} from '@react-navigation/native';
 @observer
 class Index extends Component {
@@ -31,12 +38,13 @@ class Index extends Component {
 
   render() {
     return (
-      <ScrollView>
-        <StatusBar backgroundColor={'transparent'} translucent={true} />
-        <View>
-          <Text>share</Text>
-        </View>
-      </ScrollView>
+      <ScrollableTabView
+        style={{}}
+        initialPage={0}
+        renderTabBar={() => <CustomerBar />}>
+        <Newest tabLabel="推荐" />
+        <Newest tabLabel="推荐" />
+      </ScrollableTabView>
     );
   }
 }
