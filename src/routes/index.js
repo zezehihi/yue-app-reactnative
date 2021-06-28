@@ -19,6 +19,7 @@ import SetMyInfo from '@/pages/my/setMyInfo';
 import NewsDetail from '@/pages/news/newsDetail';
 import Collect from '@/pages/my/collect';
 import Video from '@/pages/video';
+import Music from '@/pages/music';
 const Stack = createStackNavigator();
 
 @inject('AccountStore')
@@ -27,7 +28,7 @@ class Nav extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      initialRouteName: this.props.AccountStore.token ? 'Video' : 'Login',
+      initialRouteName: this.props.AccountStore.token ? 'Index' : 'Login',
     };
   }
   render() {
@@ -51,6 +52,7 @@ class Nav extends Component {
           <Stack.Screen name="NewsDetail" component={NewsDetail} />
           <Stack.Screen name="Collect" component={Collect} />
           <Stack.Screen name="Video" component={Video} />
+          <Stack.Screen name="Music" component={Music} />
         </Stack.Navigator>
       </NavigationContainer>
     );

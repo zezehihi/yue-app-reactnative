@@ -112,7 +112,9 @@ class Index extends Component {
               </View>
               <Text style={styles.iconText}>商城</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.iconTouchableOpacity}>
+            <TouchableOpacity
+              style={styles.iconTouchableOpacity}
+              onPress={() => this.context.navigate('Video')}>
               <View style={styles.iconContainer}>
                 <Image
                   source={require('@/assets/images/icons/newSong.png')}
@@ -132,7 +134,9 @@ class Index extends Component {
               </View>
               <Text style={styles.iconText}>资讯</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.iconTouchableOpacity}>
+            <TouchableOpacity
+              style={styles.iconTouchableOpacity}
+              onPress={() => this.context.navigate('Music')}>
               <View style={styles.iconContainer}>
                 <Image
                   source={require('@/assets/images/icons/accompaniment.png')}
