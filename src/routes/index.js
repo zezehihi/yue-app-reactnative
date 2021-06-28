@@ -18,6 +18,7 @@ import VideoDetail from '@/pages/video/videoDetail';
 import SetMyInfo from '@/pages/my/setMyInfo';
 import NewsDetail from '@/pages/news/newsDetail';
 import Collect from '@/pages/my/collect';
+import Video from '@/pages/video';
 const Stack = createStackNavigator();
 
 @inject('AccountStore')
@@ -26,7 +27,7 @@ class Nav extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      initialRouteName: this.props.AccountStore.token ? 'TabBar' : 'Login',
+      initialRouteName: this.props.AccountStore.token ? 'Video' : 'Login',
     };
   }
   render() {
@@ -49,6 +50,7 @@ class Nav extends Component {
           <Stack.Screen name="SetMyInfo" component={SetMyInfo} />
           <Stack.Screen name="NewsDetail" component={NewsDetail} />
           <Stack.Screen name="Collect" component={Collect} />
+          <Stack.Screen name="Video" component={Video} />
         </Stack.Navigator>
       </NavigationContainer>
     );

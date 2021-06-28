@@ -56,11 +56,15 @@ class Index extends Component {
               style={{height: pxToDpH(660)}}
               control={true}>
               {news.map((v, i) => (
-                <Image
-                  key={i}
-                  style={{height: pxToDpH(660)}}
-                  source={{uri: v?.newsimages[0].photolink}}
-                />
+                <TouchableOpacity
+                  activeOpacity={1}
+                  onPress={() => this.context.navigate('NewsDetail', v)}>
+                  <Image
+                    key={i}
+                    style={{height: pxToDpH(660)}}
+                    source={{uri: v?.newsimages[0].photolink}}
+                  />
+                </TouchableOpacity>
               ))}
             </Carousel>
           </View>

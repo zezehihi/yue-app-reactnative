@@ -94,6 +94,14 @@ const Api = {
    * 视频播放ID
    */
   VIDEO_URL: `${MUSIC_URI}/video/url?id=:id`,
+  /**
+   * 获取音乐url
+   */
+  GET_MUSIC_URL: `${MUSIC_URI}/song/url?id=:id&realIP=116.25.146.177`,
+  /**
+   * 获取音乐详情
+   */
+  GET_MUSIC_INFORMATION: `${MUSIC_URI}/song/detail?ids=:musicId`,
 };
 
 export default Api;

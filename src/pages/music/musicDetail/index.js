@@ -111,23 +111,18 @@ class Index extends Component {
   };
 
   getTrueMusicUrl = async id => {
-    const {MUSIC_URI} = Api;
+    const {GET_MUSIC_URL} = Api;
     const musicId = id;
-    const url = `${MUSIC_URI}/song/url?id=${musicId}&realIP=116.25.146.177`;
+    const url = GET_MUSIC_URL.replace(':id', id);
     const res = await request.get(url);
     this.setState({musicUrl: res.data.data[0].url, loading: false});
-
-    //const url = `https://music.163.com/song/media/outer/url?id=${musicId}.mp3`;
-    console.log(url);
-    //this.setState({musicUrl: url, loading: false});
-
     this.playMusic();
   };
   getMusicInformation = async id => {
-    const {MUSIC_URI} = Api;
+    const {GET_MUSIC_INFORMATION} = Api;
     const musicId = id;
     this.setState({loading: true});
-    const url = `${MUSIC_URI}/song/detail?ids=${musicId}`;
+    const url = GET_MUSIC_INFORMATION.replace(':musicId', id);
     const res = await request.get(url);
     this.setState({
       music: res.data.songs[0],
