@@ -66,6 +66,22 @@ const Api = {
    * 获取是否收藏音乐或视频状态
    */
   ACTION_GET_COLLECT_STATE: `${api}/action/getCollectState/:userId/:mvId `,
+  /**
+   * 发布评论
+   */
+  ACTION_COMMENT: `${api}/action/comment`,
+  /**
+   * 删除评论
+   */
+  ACTION_DELETE_COMMENT: `${api}/action/deleteComment/:id`,
+  /**
+   * 获取全部评论
+   */
+  ACTION_GET_COMMENT_LIST: `${api}/action/getCommentList/:commentId`,
+  /**
+   * 获取用户评论
+   */
+  ACTION_GET_USER_COMMENT_LIST: `${api}/action/getUserCommentList/:userId`,
 
   /**
    * 新闻模块接口

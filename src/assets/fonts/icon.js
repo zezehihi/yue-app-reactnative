@@ -15,4 +15,5 @@ export default {
   infoCircle: '\ue783',
   bulb: '\ue7fa',
   starFill: '\ue90e',
+  editFill: '\ue914',
 };
