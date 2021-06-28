@@ -20,6 +20,7 @@ import NewsDetail from '@/pages/news/newsDetail';
 import Collect from '@/pages/my/collect';
 import Video from '@/pages/video';
 import Music from '@/pages/music';
+import MyComments from '@/pages/my/myComments';
 const Stack = createStackNavigator();
 
 @inject('AccountStore')
@@ -53,6 +54,7 @@ class Nav extends Component {
           <Stack.Screen name="Collect" component={Collect} />
           <Stack.Screen name="Video" component={Video} />
           <Stack.Screen name="Music" component={Music} />
+          <Stack.Screen name="MyComments" component={MyComments} />
         </Stack.Navigator>
       </NavigationContainer>
     );

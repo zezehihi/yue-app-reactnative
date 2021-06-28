@@ -16,4 +16,5 @@ export default {
   bulb: '\ue7fa',
   starFill: '\ue90e',
   editFill: '\ue914',
+  comments: '\ue991',
 };

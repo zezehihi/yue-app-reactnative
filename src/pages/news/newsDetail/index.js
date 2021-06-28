@@ -25,7 +25,7 @@ import {observer, inject} from 'mobx-react';
 class Index extends Component {
   state = {
     news: '',
-
+    newsId: '',
     inputComment: '',
     showModal: true,
     comments: '',
@@ -35,12 +35,20 @@ class Index extends Component {
     this.overlayViewRef = null;
   }
   async componentDidMount() {
-    this.setState({news: this.props.route.params}, () => this.getCommentList());
+    const id = this.props.route.params;
+    await this.getNews(id);
+    await this.getCommentList(id);
   }
-  getCommentList = async () => {
+  getNews = async id => {
+    const {GET_NEWS} = Api;
+    const url = GET_NEWS.replace(':id', id);
+    const res = await request.get(url);
+    this.setState({news: res.data.news});
+  };
+  getCommentList = async id => {
     const {ACTION_GET_COMMENT_LIST} = Api;
     const {news} = this.state;
-    const url = ACTION_GET_COMMENT_LIST.replace(':commentId', news.id);
+    const url = ACTION_GET_COMMENT_LIST.replace(':commentId', id);
     const res = await request.get(url);
     console.log(res);
     this.setState({comments: res.data.comments});

@@ -57,6 +57,7 @@ class Index extends Component {
               control={true}>
               {news.map((v, i) => (
                 <TouchableOpacity
+                  key={i}
                   activeOpacity={1}
                   onPress={() => this.context.navigate('NewsDetail', v)}>
                   <Image
@@ -73,7 +74,7 @@ class Index extends Component {
           {news.length != 0 ? (
             news.map((v, i) => (
               <TouchableOpacity
-                onPress={() => this.context.navigate('NewsDetail', v)}
+                onPress={() => this.context.navigate('NewsDetail', v.id)}
                 key={i}
                 style={{
                   padding: size.globalPadding,

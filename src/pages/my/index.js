@@ -135,8 +135,29 @@ class Index extends Component {
                 color: '#404a50',
                 fontSize: size.font2,
                 textAlign: 'center',
+                alignItems: 'center',
               }}>
-              收藏
+              我的收藏
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => this.context.navigate('MyComments')}
+            style={{
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <IconFont
+              name="comments"
+              style={{color: '#4997c1', fontSize: pxToDpW(100)}}
+            />
+            <Text
+              style={{
+                color: '#404a50',
+                fontSize: size.font2,
+                textAlign: 'center',
+              }}>
+              我的评论
             </Text>
           </TouchableOpacity>
         </View>

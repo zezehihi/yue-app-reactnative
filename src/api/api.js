@@ -88,9 +88,14 @@ const Api = {
    */
 
   /**
-   * 获取新闻
+   * 获取新闻列表
    */
   GET_NEWS_LIST: `${api}/news/getNewsList/:size`,
+  /**
+   * 获取新闻详情
+   */
+  GET_NEWS: `${api}/news/getNews/:id`,
+
   /**
    * 网易云音乐API
    */
