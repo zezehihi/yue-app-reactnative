@@ -44,6 +44,7 @@ class Index extends Component {
     return (
       <ScrollView>
         <StatusBar backgroundColor={'transparent'} translucent={true} />
+        <View style={{paddingBottom: pxToDpH(100)}}></View>
         {news.length != 0 ? (
           news.map((v, i) => (
             <TouchableOpacity

@@ -13,8 +13,8 @@ import Store from '@/pages/store';
 import News from '@/pages/news';
 import YueJu from '@/pages/yueju';
 import SearchResult from '@/pages/searchResult';
-import Music from '@/pages/music';
-import Video from '@/pages/video';
+import MusicDetail from '@/pages/music/musicDetail';
+import VideoDetail from '@/pages/video/videoDetail';
 import SetMyInfo from '@/pages/my/setMyInfo';
 import NewsDetail from '@/pages/news/newsDetail';
 import Collect from '@/pages/my/collect';
@@ -26,7 +26,7 @@ class Nav extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      initialRouteName: this.props.AccountStore.token ? 'Collect' : 'Login',
+      initialRouteName: this.props.AccountStore.token ? 'TabBar' : 'Login',
     };
   }
   render() {
@@ -44,8 +44,8 @@ class Nav extends Component {
           <Stack.Screen name="YueJu" component={YueJu} />
           <Stack.Screen name="SearchResult" component={SearchResult} />
           <Stack.Screen name="TabBar" component={TabBar} />
-          <Stack.Screen name="Music" component={Music} />
-          <Stack.Screen name="Video" component={Video} />
+          <Stack.Screen name="MusicDetail" component={MusicDetail} />
+          <Stack.Screen name="VideoDetail" component={VideoDetail} />
           <Stack.Screen name="SetMyInfo" component={SetMyInfo} />
           <Stack.Screen name="NewsDetail" component={NewsDetail} />
           <Stack.Screen name="Collect" component={Collect} />

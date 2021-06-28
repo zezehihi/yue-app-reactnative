@@ -170,7 +170,7 @@ class Index extends Component {
                 <TouchableOpacity
                   key={i}
                   style={styles.columnItemsContainer}
-                  onPress={() => this.context.navigate('Music', v.id)}>
+                  onPress={() => this.context.navigate('MusicDetail', v.id)}>
                   <View style={styles.columnImageContainer}>
                     <Image
                       source={{uri: v.al.picUrl}}
@@ -212,7 +212,7 @@ class Index extends Component {
                 <TouchableOpacity
                   key={i}
                   style={styles.columnItemsContainer}
-                  onPress={() => this.context.navigate('Video', v.vid)}>
+                  onPress={() => this.context.navigate('VideoDetail', v.vid)}>
                   <View
                     style={{
                       borderRadius: 10,
