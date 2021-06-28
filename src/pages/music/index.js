@@ -111,8 +111,9 @@ class Index extends Component {
   };
 
   getTrueMusicUrl = async id => {
+    const {MUSIC_URI} = Api;
     const musicId = id;
-    const url = `https://cloudmusic.1dtfc.com/song/url?id=${musicId}&realIP=116.25.146.177`;
+    const url = `${MUSIC_URI}/song/url?id=${musicId}&realIP=116.25.146.177`;
     const res = await request.get(url);
     this.setState({musicUrl: res.data.data[0].url, loading: false});
 
@@ -123,9 +124,10 @@ class Index extends Component {
     this.playMusic();
   };
   getMusicInformation = async id => {
+    const {MUSIC_URI} = Api;
     const musicId = id;
     this.setState({loading: true});
-    const url = `https://cloudmusic.1dtfc.com/song/detail?ids=${musicId}`;
+    const url = `${MUSIC_URI}/song/detail?ids=${musicId}`;
     const res = await request.get(url);
     this.setState({
       music: res.data.songs[0],

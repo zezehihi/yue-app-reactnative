@@ -9,7 +9,7 @@ export default class extends Component {
       <SearchBar
         platform="android"
         lightTheme={true}
-        placeholder="戏剧搜索"
+        placeholder={this.props.placeholder || '戏剧搜索'}
         color={'#667580'}
         onEndEditing={this.props.onEndEditing}
         onChangeText={this.props.onChangeText}
@@ -19,6 +19,7 @@ export default class extends Component {
         inputStyle={styles.input}
         leftIconContainerStyle={styles.leftIconContainer}
         rightIconContainerStyle={styles.leftIconContainer}
+        onClear={this.props.onClear || function () {}}
       />
     );
   }

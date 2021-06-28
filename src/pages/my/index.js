@@ -66,6 +66,7 @@ class Index extends Component {
       <View
         style={{
           padding: size.globalPadding,
+          paddingTop: 0,
         }}>
         <StatusBar backgroundColor={'transparent'} translucent={true} />
         {/* 用户信息 */}
@@ -104,6 +105,39 @@ class Index extends Component {
               name="right"
               style={{color: '#1b7eb2', fontSize: size.font1}}
             />
+          </TouchableOpacity>
+        </View>
+        {/* 各种按钮 */}
+        <View
+          style={{
+            backgroundColor: '#fefefe',
+            marginTop: pxToDpH(80),
+            padding: pxToDpH(30),
+            borderRadius: 5,
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            justifyContent: 'space-around',
+            elevation: 10,
+            shadowColor: '#eeeeee',
+          }}>
+          <TouchableOpacity
+            onPress={() => this.context.navigate('Collect')}
+            style={{
+              flexDirection: 'column',
+              justifyContent: 'center',
+            }}>
+            <IconFont
+              name="starFill"
+              style={{color: '#4997c1', fontSize: pxToDpW(100)}}
+            />
+            <Text
+              style={{
+                color: '#404a50',
+                fontSize: size.font2,
+                textAlign: 'center',
+              }}>
+              收藏
+            </Text>
           </TouchableOpacity>
         </View>
         {/* 其他按钮 */}

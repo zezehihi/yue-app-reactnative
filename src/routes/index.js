@@ -12,13 +12,12 @@ import My from '@/pages/my';
 import Store from '@/pages/store';
 import News from '@/pages/news';
 import YueJu from '@/pages/yueju';
-import Collect from '@/pages/collect';
 import SearchResult from '@/pages/searchResult';
 import Music from '@/pages/music';
 import Video from '@/pages/video';
 import SetMyInfo from '@/pages/my/setMyInfo';
 import NewsDetail from '@/pages/news/newsDetail';
-
+import Collect from '@/pages/my/collect';
 const Stack = createStackNavigator();
 
 @inject('AccountStore')
@@ -27,7 +26,7 @@ class Nav extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      initialRouteName: this.props.AccountStore.token ? 'TabBar' : 'Login',
+      initialRouteName: this.props.AccountStore.token ? 'Collect' : 'Login',
     };
   }
   render() {
@@ -43,13 +42,13 @@ class Nav extends Component {
           <Stack.Screen name="Store" component={Store} />
           <Stack.Screen name="News" component={News} />
           <Stack.Screen name="YueJu" component={YueJu} />
-          <Stack.Screen name="Collect" component={Collect} />
           <Stack.Screen name="SearchResult" component={SearchResult} />
           <Stack.Screen name="TabBar" component={TabBar} />
           <Stack.Screen name="Music" component={Music} />
           <Stack.Screen name="Video" component={Video} />
           <Stack.Screen name="SetMyInfo" component={SetMyInfo} />
           <Stack.Screen name="NewsDetail" component={NewsDetail} />
+          <Stack.Screen name="Collect" component={Collect} />
         </Stack.Navigator>
       </NavigationContainer>
     );
