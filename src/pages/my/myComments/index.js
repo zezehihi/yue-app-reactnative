@@ -47,12 +47,18 @@ class Index extends Component {
     if (myComments.length == 0) return <></>;
 
     return myComments.map((v, i) => {
-      let Type =
-        v.type == 0
-          ? 'NewsDetail'
-          : v.type == 1
-          ? 'MusicDetail'
-          : 'VideoDetail';
+      let Type = '';
+      switch (v.type) {
+        case 0:
+          Type = 'NewsDetail';
+          break;
+        case 1:
+          Type = 'MusicDetail';
+          break;
+        case 1014:
+          Type = 'VideoDetail';
+          break;
+      }
       return (
         <View
           style={{

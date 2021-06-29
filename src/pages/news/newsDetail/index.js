@@ -48,7 +48,10 @@ class Index extends Component {
   getCommentList = async id => {
     const {ACTION_GET_COMMENT_LIST} = Api;
     const {news} = this.state;
-    const url = ACTION_GET_COMMENT_LIST.replace(':commentId', id);
+    const url = ACTION_GET_COMMENT_LIST.replace(':commentId', id).replace(
+      ':type',
+      0,
+    );
     const res = await request.get(url);
     console.log(res);
     this.setState({comments: res.data.comments});

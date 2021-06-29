@@ -77,7 +77,7 @@ const Api = {
   /**
    * 获取全部评论
    */
-  ACTION_GET_COMMENT_LIST: `${api}/action/getCommentList/:commentId`,
+  ACTION_GET_COMMENT_LIST: `${api}/action/getCommentList/:commentId/:type`,
   /**
    * 获取用户评论
    */
