@@ -25,6 +25,7 @@ import {observer} from 'mobx-react';
 import Newest from '@/pages/share/newest';
 import Publish from '@/pages/share/publish';
 import CustomerBar from '@/pages/share/components/CustomerBar';
+import Recommend from '@/pages/share/recommend';
 
 import ScrollableTabView, {
   DefaultTabBar,
@@ -43,7 +44,7 @@ class Index extends Component {
         initialPage={0}
         renderTabBar={() => <CustomerBar />}>
         <Newest tabLabel="最新" />
-        <Newest tabLabel="推荐" />
+        <Recommend tabLabel="推荐" />
       </ScrollableTabView>
     );
   }

@@ -24,6 +24,7 @@ import MyComments from '@/pages/my/myComments';
 import Share from '@/pages/share';
 import Newest from '@/pages/share/newest';
 import Publish from '@/pages/share/publish';
+import Recommend from '@/pages/share/recommend';
 
 const Stack = createStackNavigator();
 
@@ -62,6 +63,7 @@ class Nav extends Component {
           <Stack.Screen name="Share" component={Share} />
           <Stack.Screen name="Newest" component={Newest} />
           <Stack.Screen name="Publish" component={Publish} />
+          <Stack.Screen name="Recommend" component={Recommend} />
         </Stack.Navigator>
       </NavigationContainer>
     );
