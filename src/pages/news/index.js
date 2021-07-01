@@ -66,7 +66,7 @@ class Index extends Component {
                 <TouchableOpacity
                   key={i}
                   activeOpacity={1}
-                  onPress={() => this.context.navigate('NewsDetail', v)}>
+                  onPress={() => this.context.navigate('NewsDetail', v.id)}>
                   <Image
                     key={i}
                     style={{height: pxToDpH(660)}}

@@ -92,7 +92,9 @@ class Index extends Component {
           {v.images != 0 && (
             <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
               {v.shareimages.map((vv, ii) => (
-                <TouchableOpacity onPress={() => this.handleShowAlbum(i, ii)}>
+                <TouchableOpacity
+                  key={ii}
+                  onPress={() => this.handleShowAlbum(i, ii)}>
                   <Image
                     source={{uri: vv.photolink}}
                     style={{
