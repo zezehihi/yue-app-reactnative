@@ -158,7 +158,7 @@ class Index extends Component {
                 fontSize: size.font2,
                 textAlign: 'center',
               }}>
-              我的评论
+              我的点评
             </Text>
           </TouchableOpacity>
         </View>

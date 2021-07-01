@@ -103,7 +103,7 @@ class Index extends Component {
           paddingTop: 0,
         }}>
         <StatusBar backgroundColor={'transparent'} translucent={true} />
-        <TopNav title="我的评论" />
+        <TopNav title="我的点评" />
         <View
           style={{
             flexDirection: 'column',

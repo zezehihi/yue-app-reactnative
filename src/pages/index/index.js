@@ -102,7 +102,7 @@ class Index extends Component {
               justifyContent: 'space-around',
               flexDirection: 'row',
             }}>
-            <TouchableOpacity style={styles.iconTouchableOpacity}>
+            {/* <TouchableOpacity style={styles.iconTouchableOpacity}>
               <View style={styles.iconContainer}>
                 <Image
                   source={require('@/assets/images/icons/store.png')}
@@ -111,7 +111,7 @@ class Index extends Component {
                 />
               </View>
               <Text style={styles.iconText}>商城</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <TouchableOpacity
               style={styles.iconTouchableOpacity}
               onPress={() => this.context.navigate('Video')}>
