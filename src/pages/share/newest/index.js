@@ -148,8 +148,15 @@ class Index extends Component {
     }));
     this.setState({imgUrls, currentIndex: ii, showAlbum: true});
   };
+  updateFun = () => {
+    console.log('updateFun');
+    this.getNewestList();
+  };
   render() {
     const {showAlbum, imgUrls, currentIndex} = this.state;
+    const tmp = function () {
+      console.log('update');
+    };
     return (
       <View style={{position: 'relative', flex: 1}}>
         <ScrollView style={{position: 'relative'}}>
@@ -164,11 +171,7 @@ class Index extends Component {
         </ScrollView>
         <TouchableOpacity
           onPress={() =>
-            this.context.navigate('Publish', {
-              refresh: function () {
-                this.getNewestList;
-              },
-            })
+            this.context.navigate('Publish', {update: () => this.updateFun()})
           }
           style={{
             backgroundColor: '#b8dfef',

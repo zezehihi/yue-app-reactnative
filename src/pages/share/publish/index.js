@@ -80,12 +80,16 @@ class Index extends Component {
     const {success} = res.data;
     if (success) {
       Toast.smile('发表成功！', 1000);
+      this.props.route.params.update();
+      this.props.navigation.goBack();
       // this.props.navigation.navigate("Tabbar");
       // this.props.navigation.reset({
       //   routes: [{name: 'TabBar'}],
       // });
-      this.props.navigation.goBack();
-      this.props.route.params.refresh();
+      // this.props.navigation.navigate('TabBar', 'message');
+      // this.props.navigation.reset({
+      //   routes: [{name: 'TabBar'}],
+      // });
     }
   };
   render() {
