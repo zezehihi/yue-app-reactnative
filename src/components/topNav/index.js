@@ -11,6 +11,9 @@ import {color, pxToDpH, pxToDpW, layout, size} from '@/MyStyle';
 import IconFont from '@/components/IconFont';
 class Index extends Component {
   static contextType = NavigationContext;
+  defaultValue = {
+    hasRight: false,
+  };
   render() {
     // goBack
     return (
@@ -42,6 +45,7 @@ class Index extends Component {
           <Text style={{fontSize: size.font1, color: this.props.color}}>
             {this.props.title}
           </Text>
+
           <TouchableOpacity
             onPress={this.props.onRightPress || function () {}}
             style={{
@@ -49,10 +53,12 @@ class Index extends Component {
               flexDirection: 'row',
               alignItems: 'center',
             }}>
-            <IconFont
-              style={{color: this.props.color, fontSize: size.font1}}
-              name="ellipsis"
-            />
+            {this.props.hasRight && (
+              <IconFont
+                style={{color: this.props.color, fontSize: size.font1}}
+                name={this.props.rightIcon || 'ellipsis'}
+              />
+            )}
           </TouchableOpacity>
         </View>
       </View>

@@ -17,4 +17,10 @@ export default {
   starFill: '\ue90e',
   editFill: '\ue914',
   comments: '\ue991',
+  images: '\ue831',
+  smile: '\ue78f',
+  send: '\ue9d0',
+  heart: '\ue836',
+  right: '\ue856',
+  right: '\ue857',
 };

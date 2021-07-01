@@ -70,7 +70,7 @@ class Index extends Component {
 
   uploadAvatar = async () => {
     const image = await ImagePicker.openPicker({
-      width: 300,
+      width: 400,
       height: 400,
       cropping: true,
     });

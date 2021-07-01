@@ -42,7 +42,7 @@ class Index extends Component {
         style={{}}
         initialPage={0}
         renderTabBar={() => <CustomerBar />}>
-        <Newest tabLabel="推荐" />
+        <Newest tabLabel="最新" />
         <Newest tabLabel="推荐" />
       </ScrollableTabView>
     );

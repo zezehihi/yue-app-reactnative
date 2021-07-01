@@ -13,7 +13,7 @@ const instance = axios.create({
 // 添加请求拦截器
 instance.interceptors.request.use(
   function (config) {
-    //Toast.showLoading('请求中');
+    Toast.showLoading('请求中');
     return config;
   },
   error => {
@@ -24,7 +24,7 @@ instance.interceptors.request.use(
 // 添加响应拦截器
 instance.interceptors.response.use(
   function (response) {
-    // Toast.hideLoading();
+    Toast.hideLoading();
     return response;
   },
   error => {

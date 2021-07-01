@@ -1,7 +1,7 @@
 const mockApi = '/mockApi';
-// const BASE_URI = 'http://172.20.10.9:8809';
+const BASE_URI = 'http://172.20.10.9:8809';
 //const BASE_URI = 'http://localhost:8809';
-const BASE_URI = 'http://192.168.0.107:8809';
+// const BASE_URI = 'http://192.168.0.107:8809';
 const MUSIC_URI = 'https://cloudmusic.1dtfc.com';
 const FILE_URI = 'http://yun.1dtfc.com';
 const api = BASE_URI + '/yue';
@@ -49,7 +49,11 @@ const Api = {
   /**
    * 上传用户头像
    */
-  FILE_UPLOAD_AVATARS: `${api}/file/uploadAvatars `,
+  FILE_UPLOAD_AVATARS: `${api}/file/uploadAvatars`,
+  /**
+   * 上传动态图片
+   */
+  FILE_UPLOAD_SHAREIMAGES: `${api}/file/uploadShareImages`,
 
   /**
    * 用户行为接口
@@ -99,6 +103,7 @@ const Api = {
   /**
    * 网易云音乐API
    */
+
   /**
    * 获取歌单 就这里吧（。
    */
@@ -123,6 +128,19 @@ const Api = {
    * 获取音乐详情
    */
   GET_MUSIC_INFORMATION: `${MUSIC_URI}/song/detail?ids=:musicId`,
+
+  /**
+   * 用户动态接口
+   */
+  SHARE_GET_ALL_SHARE_LIST: `${api}/share/getAllShareList/:sort/:order`,
+  /**
+   * 点赞
+   */
+  SHARE_LIKE_SHARE: `${api}/share/likeShare`,
+  /**
+   * 发布动态
+   */
+  SHARE_SHARE: `${api}/share/share`,
 };
 
 export default Api;

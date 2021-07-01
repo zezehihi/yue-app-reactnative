@@ -125,6 +125,7 @@ class Index extends Component {
             style={{
               flexDirection: 'column',
               justifyContent: 'center',
+              alignItems: 'center',
             }}>
             <IconFont
               name="starFill"
