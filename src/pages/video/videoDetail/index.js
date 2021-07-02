@@ -298,12 +298,11 @@ class Index extends Component {
               onChangeText={text => this.setState({inputComment: text})}
             />
           </View>
-          <ScrollView
-            style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
+          <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
             <Text style={{color: '#627681', fontSize: size.font2}}>
               {inputComment.length}
             </Text>
-          </ScrollView>
+          </View>
         </View>
       </Overlay.PullView>
     );
@@ -322,7 +321,7 @@ class Index extends Component {
       const res = await request.post(ACTION_COMMENT, params);
       const {success} = res.data;
       if (success == true) {
-        await this.getCommentList();
+        await this.getCommentList(videoId);
         this.overlayViewRef.close();
       } else {
         Toast.sad('评论未成功！', 4000);
@@ -404,9 +403,10 @@ class Index extends Component {
   deleteComment = id => {
     const tmpdelete = async () => {
       const {ACTION_DELETE_COMMENT} = Api;
+      const {videoId} = this.state;
       const url = ACTION_DELETE_COMMENT.replace(':id', id);
       const res = await request.get(url);
-      await this.getCommentList();
+      await this.getCommentList(videoId);
     };
 
     const opts = [{title: '删除评论', onPress: tmpdelete}];

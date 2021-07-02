@@ -158,7 +158,7 @@ class Index extends Component {
       const title = selectType == 1 ? v?.name : v.title;
       const desc = selectType == 1 ? v.al?.name : '';
       const id = selectType == 1 ? v?.id : v?.vid;
-      const Type = selectType == 1 ? 'Music' : 'Video';
+      const Type = selectType == 1 ? 'MusicDetail' : 'VideoDetail';
       return (
         <TouchableOpacity
           onPress={() => this.context.navigate(Type, id)}

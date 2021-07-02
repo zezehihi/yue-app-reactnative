@@ -69,7 +69,7 @@ class Index extends Component {
       const res = await request.post(ACTION_COMMENT, params);
       const {success} = res.data;
       if (success == true) {
-        await this.getCommentList();
+        await this.getCommentList(news.id);
         this.overlayViewRef.close();
       } else {
         Toast.sad('评论未成功！', 4000);
@@ -160,7 +160,7 @@ class Index extends Component {
       const {ACTION_DELETE_COMMENT} = Api;
       const url = ACTION_DELETE_COMMENT.replace(':id', id);
       const res = await request.get(url);
-      await this.getCommentList();
+      await this.getCommentList(news.id);
     };
 
     const opts = [{title: '删除评论', onPress: tmpdelete}];
@@ -232,7 +232,7 @@ class Index extends Component {
         <ScrollView
           style={{padding: size.globalPadding, paddingTop: 0, flex: 1}}>
           <StatusBar backgroundColor={'transparent'} translucent={true} />
-          <TopNav />
+          <TopNav style={{paddingTop: pxToDpH(10)}} />
           <Text
             style={{
               textAlign: 'center',
