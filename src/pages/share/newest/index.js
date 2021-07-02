@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import {color, pxToDpH, pxToDpW, layout, size} from '@/MyStyle';
-import {Carousel} from 'teaset';
+import {Carousel, Toast} from 'teaset';
 import SearchBar from '@/components/searchBar';
 import {Divider, Image, Avatar} from 'react-native-elements';
 import Api from '@/api/api';
@@ -22,9 +22,9 @@ import SoundPlayer from 'react-native-sound-player';
 import {BlurView, VibrancyView} from '@react-native-community/blur';
 import TopNav from '@/components/topNav';
 import IconFont from '@/components/IconFont';
-import {observer} from 'mobx-react';
+import {observer, inject} from 'mobx-react';
 import {NavigationContext} from '@react-navigation/native';
-@observer
+@inject('AccountStore')
 class Index extends Component {
   static contextType = NavigationContext;
   state = {
@@ -45,6 +45,21 @@ class Index extends Component {
     const res = await request.get(url);
     console.log(res.data.share);
     this.setState({shares: res.data.share});
+  };
+  likeShare = async shareId => {
+    const {SHARE_LIKE_SHARE} = Api;
+    const params = {
+      like: true,
+      shareId: shareId,
+      userId: this.props.AccountStore.userId,
+    };
+    const res = await request.post(SHARE_LIKE_SHARE, params);
+    console.log(res);
+    const {success} = res.data;
+    if (success) {
+      Toast.smile('点赞成功！');
+      this.getNewestList();
+    }
   };
   renderShares = () => {
     const {shares} = this.state;
@@ -126,6 +141,7 @@ class Index extends Component {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
+              onPress={() => this.likeShare(v.id)}
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',

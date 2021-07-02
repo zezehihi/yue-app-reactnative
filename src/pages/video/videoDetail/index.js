@@ -3,7 +3,6 @@ import {
   Text,
   View,
   StatusBar,
-  Image,
   TouchableOpacity,
   StyleSheet,
   ImageBackground,
@@ -13,9 +12,9 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import {color, pxToDpH, pxToDpW, layout, size} from '@/MyStyle';
-import {Divider} from 'react-native-elements';
-import {Carousel, Toast} from 'teaset';
+import {Carousel, Toast, Overlay, ActionSheet} from 'teaset';
 import SearchBar from '@/components/searchBar';
+import {Divider, Avatar, Image, Button, Input} from 'react-native-elements';
 import Swiper from '@/pages/index/components/swiper';
 import Api from '@/api/api';
 import request from '@/services/request';
@@ -43,7 +42,13 @@ class Index extends Component {
     isShowMenu: true,
     slideValue: 0.0,
     isCollect: false,
+    inputComment: '',
+    comments: '',
   };
+  constructor() {
+    super();
+    this.overlayViewRef = null;
+  }
   async componentDidMount() {
     const videoId = this.props.route.params.toString();
 
@@ -53,6 +58,7 @@ class Index extends Component {
     this.getVideoInformation(videoId);
     this.getVideoUrl(videoId);
     this.getCollectState(videoId);
+    this.getCommentList(videoId);
   }
 
   getVideoInformation = async videoId => {
@@ -143,13 +149,14 @@ class Index extends Component {
             justifyContent: 'space-around',
           }}>
           <TouchableOpacity
+            onPress={() => this.showOverlay()}
             style={{
               flexDirection: 'column',
               alignItems: 'center',
               width: pxToDpW(200),
             }}>
             <IconFont
-              name="like"
+              name="comments"
               style={{color: '#a0acb4', fontSize: pxToDpW(110)}}
             />
           </TouchableOpacity>
@@ -167,13 +174,21 @@ class Index extends Component {
             />
           </TouchableOpacity>
         </View>
+        {/*  */}
+        <View style={{}}>
+          <View style={{marginTop: pxToDpH(40)}}>
+            <Text style={{color: '#627681', fontSize: size.font3}}>
+              评论列表
+            </Text>
+            <View style={{flexDirection: 'column'}}>{this.commentList()}</View>
+          </View>
+        </View>
       </View>
     );
   };
   bottomMenu = () => {
     if (this.state.isFullScreen) {
       // TODO全屏
-      console.log('是底部屏');
       return this.portraitBottomMenu();
     } else {
       console.log('不是全屏');
@@ -233,12 +248,174 @@ class Index extends Component {
       slideValue: data.currentTime,
     });
   };
+  showOverlay = () => {
+    const {inputComment} = this.state;
+    let overlayView = (
+      <Overlay.PullView
+        ref={ref => (this.overlayViewRef = ref)}
+        side="bottom"
+        modal={false}>
+        <View
+          style={{
+            backgroundColor: '#fff',
+            minWidth: 300,
+            minHeight: 260,
+            padding: size.globalPadding,
+            flexDirection: 'column',
+          }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+            }}>
+            <Button
+              title="取消"
+              type="clear"
+              onPress={() => {
+                this.overlayViewRef.close();
+                this.setState({inputComment: ''});
+              }}
+            />
+            <Button title="提交" type="clear" onPress={this.comment} />
+          </View>
+          <View style={{}}>
+            <Input
+              placeholder="写评论..."
+              multiline={true}
+              style={{
+                height: pxToDpH(500),
+                alignItems: 'flex-start',
+              }}
+              inputStyle={{
+                fontSize: size.font2,
+                color: '#888888',
+                lineHeight: size.font2,
+                textAlignVertical: 'top',
+              }}
+              inputContainerStyle={{
+                borderBottomColor: 'rgba(255, 255, 255, 0)',
+              }}
+              onChangeText={text => this.setState({inputComment: text})}
+            />
+          </View>
+          <ScrollView
+            style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
+            <Text style={{color: '#627681', fontSize: size.font2}}>
+              {inputComment.length}
+            </Text>
+          </ScrollView>
+        </View>
+      </Overlay.PullView>
+    );
+    Overlay.show(overlayView);
+  };
+  comment = async () => {
+    const {ACTION_COMMENT} = Api;
+    const {inputComment, videoId} = this.state;
+    if (inputComment.length != 0) {
+      const params = {
+        userId: this.props.AccountStore.userId,
+        type: 1014,
+        content: inputComment,
+        commentId: videoId,
+      };
+      const res = await request.post(ACTION_COMMENT, params);
+      const {success} = res.data;
+      if (success == true) {
+        await this.getCommentList();
+        this.overlayViewRef.close();
+      } else {
+        Toast.sad('评论未成功！', 4000);
+      }
+    } else {
+      Toast.sad('尚未输入！', 4000);
+    }
+  };
+  getCommentList = async id => {
+    const {ACTION_GET_COMMENT_LIST} = Api;
+    const {videoId} = this.state;
+    const url = ACTION_GET_COMMENT_LIST.replace(':commentId', id).replace(
+      ':type',
+      1014,
+    );
+    const res = await request.get(url);
+    console.log(res);
+    this.setState({comments: res.data.comments});
+  };
+  commentList = () => {
+    const {comments} = this.state;
+    if (comments.length == 0) {
+      return <></>;
+    }
+    return comments.map((v, i) => (
+      <View
+        style={{
+          flexDirection: 'column',
+          paddingTop: pxToDpH(20),
+          paddingBottom: pxToDpH(20),
+        }}>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <Avatar source={{uri: v.user.photo}} size="medium" rounded />
+          <View
+            style={{
+              flexDirection: 'column',
+              flex: 1,
+              paddingLeft: pxToDpW(30),
+            }}>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+              }}>
+              <Text style={{color: '#0088ba', fontSize: size.font2}}>
+                {v.user.nickname}
+              </Text>
+              <Text style={{color: '#cccccc', fontSize: pxToDpW(30)}}>
+                {v.createTime.slice(0, 10)}&emsp;{v.createTime.slice(11, 19)}
+              </Text>
+              {v.userid == this.props.AccountStore.userId && (
+                <TouchableOpacity onPress={() => this.deleteComment(v.id)}>
+                  <Text style={{color: '#bbbbbb', fontSize: pxToDpW(30)}}>
+                    删除
+                  </Text>
+                </TouchableOpacity>
+              )}
+            </View>
+            <Text
+              style={{
+                color: '#627681',
+                fontSize: size.font2,
+                flexWrap: 'wrap',
+              }}>
+              {v.content}
+            </Text>
+          </View>
+        </View>
 
+        <Divider
+          orientation="vertical"
+          width={5}
+          style={{marginBottom: pxToDpH(20), marginTop: pxToDpH(20)}}
+        />
+      </View>
+    ));
+  };
+  deleteComment = id => {
+    const tmpdelete = async () => {
+      const {ACTION_DELETE_COMMENT} = Api;
+      const url = ACTION_DELETE_COMMENT.replace(':id', id);
+      const res = await request.get(url);
+      await this.getCommentList();
+    };
+
+    const opts = [{title: '删除评论', onPress: tmpdelete}];
+    ActionSheet.show(opts, {title: '取消'});
+  };
   render() {
     const {video, videoUrl, loading, isPaused} = this.state;
     return (
       <View style={{flex: 1, backgroundColor: '#fff'}}>
-        {console.log(this.state.isFullScreen)}
         <TopNav
           color="black"
           title=""
