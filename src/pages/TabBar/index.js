@@ -15,9 +15,7 @@ import ScrollableTabView, {
 } from 'react-native-scrollable-tab-view';
 import Index from '@/pages/index';
 import My from '@/pages/my';
-import Store from '@/pages/store';
 import News from '@/pages/news';
-import YueJu from '@/pages/yueju';
 import IconFont from '@/components/IconFont';
 import {ActionPopover} from 'teaset';
 import {black} from 'chalk';

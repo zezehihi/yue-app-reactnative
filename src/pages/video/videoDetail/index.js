@@ -10,20 +10,15 @@ import {
   Dimensions,
   ScrollView,
 } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
 import {color, pxToDpH, pxToDpW, layout, size} from '@/MyStyle';
 import {Carousel, Toast, Overlay, ActionSheet} from 'teaset';
-import SearchBar from '@/components/searchBar';
 import {Divider, Avatar, Image, Button, Input} from 'react-native-elements';
-import Swiper from '@/pages/index/components/swiper';
 import Api from '@/api/api';
 import request from '@/services/request';
-import SoundPlayer from 'react-native-sound-player';
-import {BlurView, VibrancyView} from '@react-native-community/blur';
 import Slider from '@react-native-community/slider';
 import TopNav from '@/components/topNav';
 import IconFont from '@/components/IconFont';
-import {observer, inject} from 'mobx-react';
+import {inject} from 'mobx-react';
 import Video from 'react-native-video';
 import Orientation from 'react-native-orientation-locker';
 

@@ -9,9 +9,7 @@ import Index from '@/pages/index';
 import BottomBar from '@/pages/bottomBar';
 import TabBar from '@/pages/tabBar';
 import My from '@/pages/my';
-import Store from '@/pages/store';
 import News from '@/pages/news';
-import YueJu from '@/pages/yueju';
 import SearchResult from '@/pages/searchResult';
 import MusicDetail from '@/pages/music/musicDetail';
 import VideoDetail from '@/pages/video/videoDetail';
@@ -47,9 +45,7 @@ class Nav extends Component {
           <Stack.Screen name="Register" component={Register} />
           <Stack.Screen name="BottomBar" component={BottomBar} />
           <Stack.Screen name="My" component={My} />
-          <Stack.Screen name="Store" component={Store} />
           <Stack.Screen name="News" component={News} />
-          <Stack.Screen name="YueJu" component={YueJu} />
           <Stack.Screen name="SearchResult" component={SearchResult} />
           <Stack.Screen name="TabBar" component={TabBar} />
           <Stack.Screen name="MusicDetail" component={MusicDetail} />
