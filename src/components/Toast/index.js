@@ -1,6 +1,6 @@
 import React from 'react';
 import {ActivityIndicator} from 'react-native';
-import {Toast, Theme} from 'teaset';
+import {Theme, Toast} from 'teaset';
 
 let customKey = null;
 let customKey1 = null;

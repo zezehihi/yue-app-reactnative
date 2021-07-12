@@ -1,6 +1,6 @@
+import {pxToDpH, pxToDpW, size} from '@/MyStyle';
 import React, {Component} from 'react';
-import {Text, View, ImageBackground, TouchableOpacity} from 'react-native';
-import {color, pxToDpH, pxToDpW, layout, size} from '@/MyStyle';
+import {Text, TouchableOpacity, View} from 'react-native';
 class Index extends Component {
   render() {
     const {goToPage, tabs, activeTab} = this.props;

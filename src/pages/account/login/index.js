@@ -1,13 +1,13 @@
-import React, {Component} from 'react';
-import {View, Text, Image, StatusBar, TouchableOpacity} from 'react-native';
-import request from '@/services/request';
 import Api from '@/api/api';
-import {inject, observer} from 'mobx-react';
-import {color, pxToDpH, pxToDpW, layout, size} from '@/MyStyle';
-import {Isao} from 'react-native-textinput-effects';
 import {Primary} from '@/components/button';
 import Toast from '@/components/Toast';
+import {color, pxToDpH, pxToDpW, size} from '@/MyStyle';
+import request from '@/services/request';
 import AsyncStorage from '@react-native-community/async-storage';
+import {inject, observer} from 'mobx-react';
+import React, {Component} from 'react';
+import {Image, StatusBar, Text, TouchableOpacity, View} from 'react-native';
+import {Isao} from 'react-native-textinput-effects';
 
 @inject('AccountStore')
 @observer

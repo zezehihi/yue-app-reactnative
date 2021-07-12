@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import AwesomeButton from 'react-native-really-awesome-button';
 import {StyleSheet} from 'react-native';
+import AwesomeButton from 'react-native-really-awesome-button';
 class Primary extends Component {
   static defaultProps = {
     style: {},

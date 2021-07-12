@@ -1,4 +1,4 @@
-import {observable, action, makeAutoObservable} from 'mobx';
+import {action, makeAutoObservable, observable} from 'mobx';
 
 class AccountStore {
   constructor() {

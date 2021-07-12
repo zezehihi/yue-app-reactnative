@@ -1,14 +1,8 @@
-import React, {Component} from 'react';
-import {
-  View,
-  Text,
-  ImageBackground,
-  StatusBar,
-  TouchableOpacity,
-} from 'react-native';
-import {NavigationContext} from '@react-navigation/native';
-import {color, pxToDpH, pxToDpW, layout, size} from '@/MyStyle';
 import IconFont from '@/components/IconFont';
+import {pxToDpH, pxToDpW, size} from '@/MyStyle';
+import {NavigationContext} from '@react-navigation/native';
+import React, {Component} from 'react';
+import {StatusBar, Text, TouchableOpacity, View} from 'react-native';
 class Index extends Component {
   static contextType = NavigationContext;
   defaultValue = {

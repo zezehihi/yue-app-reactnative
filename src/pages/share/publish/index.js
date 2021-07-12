@@ -1,29 +1,21 @@
+import Api from '@/api/api';
+import IconFont from '@/components/IconFont';
+import TopNav from '@/components/topNav';
+import {pxToDpH, pxToDpW, size} from '@/MyStyle';
+import request from '@/services/request';
+import {NavigationContext} from '@react-navigation/native';
+import {inject} from 'mobx-react';
 import React, {Component} from 'react';
 import {
-  Text,
-  View,
-  StatusBar,
-  TouchableOpacity,
-  StyleSheet,
-  ImageBackground,
-  Animated,
-  Easing,
   ScrollView,
+  StatusBar,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
-import {color, pxToDpH, pxToDpW, layout, size} from '@/MyStyle';
-import {Carousel, ActionSheet, Toast} from 'teaset';
-import SearchBar from '@/components/searchBar';
-import {Divider, Avatar, Image, Button, Input} from 'react-native-elements';
-import Api from '@/api/api';
-import request from '@/services/request';
-import SoundPlayer from 'react-native-sound-player';
-import {BlurView, VibrancyView} from '@react-native-community/blur';
-import TopNav from '@/components/topNav';
-import IconFont from '@/components/IconFont';
-import {NavigationContext} from '@react-navigation/native';
-import {observer, inject} from 'mobx-react';
+import {Image, Input} from 'react-native-elements';
 import ImagePicker from 'react-native-image-crop-picker';
+import {ActionSheet, Toast} from 'teaset';
 @inject('AccountStore')
 class Index extends Component {
   static contextType = NavigationContext;

@@ -1,28 +1,14 @@
-import React, {Component} from 'react';
-import {
-  Text,
-  View,
-  StatusBar,
-  Image,
-  TouchableOpacity,
-  StyleSheet,
-  ImageBackground,
-  Animated,
-  Dimensions,
-  ScrollView,
-} from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
-import {color, pxToDpH, pxToDpW, layout, size} from '@/MyStyle';
-import {Divider} from 'react-native-elements';
-import {Carousel} from 'teaset';
-import {Primary} from '@/components/button';
-import SearchBar from '@/components/searchBar';
 import Api from '@/api/api';
-import request from '@/services/request';
-import {ActionSheet, Toast} from 'teaset';
+import {Primary} from '@/components/button';
 import IconFont from '@/components/IconFont';
-import {observer, inject} from 'mobx-react';
+import {pxToDpH, pxToDpW, size} from '@/MyStyle';
+import request from '@/services/request';
+import AsyncStorage from '@react-native-community/async-storage';
 import {NavigationContext} from '@react-navigation/native';
+import {inject} from 'mobx-react';
+import React, {Component} from 'react';
+import {Image, StatusBar, Text, TouchableOpacity, View} from 'react-native';
+import {ActionSheet, Toast} from 'teaset';
 @inject('AccountStore')
 class Index extends Component {
   static contextType = NavigationContext;
@@ -97,7 +83,7 @@ class Index extends Component {
               />
             </View>
             <Text style={{color: '#1b7eb2', fontSize: size.font1}}>
-              {user.username}
+              {user.nickname}
             </Text>
           </View>
           <TouchableOpacity onPress={() => this.context.navigate('SetMyInfo')}>

@@ -1,22 +1,20 @@
+import Api from '@/api/api';
+import SearchBar from '@/components/searchBar';
+import {pxToDpH, pxToDpW, size} from '@/MyStyle';
+import Swiper from '@/pages/index/components/swiper';
+import request from '@/services/request';
+import {NavigationContext} from '@react-navigation/native';
+import {observer} from 'mobx-react';
 import React, {Component} from 'react';
 import {
-  Text,
-  View,
-  StatusBar,
   Image,
-  TouchableOpacity,
-  StyleSheet,
   ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
-import {color, pxToDpH, pxToDpW, layout, size} from '@/MyStyle';
-import {Carousel} from 'teaset';
-import SearchBar from '@/components/searchBar';
-import Swiper from '@/pages/index/components/swiper';
-import Api from '@/api/api';
-import request from '@/services/request';
-import {observer} from 'mobx-react';
-import {NavigationContext} from '@react-navigation/native';
 @observer
 class Index extends Component {
   static contextType = NavigationContext;

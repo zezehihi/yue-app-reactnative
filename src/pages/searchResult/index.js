@@ -1,23 +1,22 @@
+import Api from '@/api/api';
+import IconFont from '@/components/IconFont';
+import SearchBar from '@/components/searchBar';
+import TopNav from '@/components/topNav';
+import {pxToDpH, pxToDpW, size} from '@/MyStyle';
+import request from '@/services/request';
+import {NavigationContext} from '@react-navigation/native';
 import React, {Component} from 'react';
 import {
-  Text,
-  View,
-  StatusBar,
   Image,
-  TouchableOpacity,
-  StyleSheet,
   ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
-import {color, pxToDpH, pxToDpW, layout, size} from '@/MyStyle';
-import {Select} from 'teaset';
-import SearchBar from '@/components/searchBar';
-import Api from '@/api/api';
-import request from '@/services/request';
-import IconFont from '@/components/IconFont';
-import TopNav from '@/components/topNav';
 import {Divider} from 'react-native-elements';
-import {NavigationContext} from '@react-navigation/native';
+import {Select} from 'teaset';
 class Index extends Component {
   static contextType = NavigationContext;
   state = {

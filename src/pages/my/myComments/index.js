@@ -1,28 +1,12 @@
-import React, {Component} from 'react';
-import {
-  Text,
-  View,
-  StatusBar,
-  Image,
-  TouchableOpacity,
-  StyleSheet,
-  ImageBackground,
-  Animated,
-  Dimensions,
-  ScrollView,
-} from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
-import {color, pxToDpH, pxToDpW, layout, size} from '@/MyStyle';
-import {Divider, Button} from 'react-native-elements';
-import {Select} from 'teaset';
-import TopNav from '@/components/topNav';
-import SearchBar from '@/components/searchBar';
 import Api from '@/api/api';
+import TopNav from '@/components/topNav';
+import {pxToDpH, pxToDpW, size} from '@/MyStyle';
 import request from '@/services/request';
-import {ActionSheet, Toast} from 'teaset';
-import IconFont from '@/components/IconFont';
-import {observer, inject} from 'mobx-react';
 import {NavigationContext} from '@react-navigation/native';
+import {inject, observer} from 'mobx-react';
+import React, {Component} from 'react';
+import {ScrollView, StatusBar, Text, View} from 'react-native';
+import {Button, Divider} from 'react-native-elements';
 @observer
 @inject('AccountStore')
 class Index extends Component {

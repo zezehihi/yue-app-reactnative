@@ -1,4 +1,4 @@
-import {pxToDpW, pxToDpH} from '@/utils/stylesKits';
+import {pxToDpH, pxToDpW} from '@/utils/stylesKits';
 import {StyleSheet} from 'react-native';
 /**
  * color

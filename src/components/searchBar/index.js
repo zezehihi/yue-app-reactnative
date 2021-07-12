@@ -1,8 +1,7 @@
-import {SearchBar} from 'react-native-elements';
+import {pxToDpH, pxToDpW, size} from '@/MyStyle';
 import React, {Component} from 'react';
-import {Text, Dimensions, StyleSheet, View, Image} from 'react-native';
-import {color, pxToDpH, pxToDpW, layout, size} from '@/MyStyle';
-import {SwiperFlatList} from 'react-native-swiper-flatlist';
+import {StyleSheet} from 'react-native';
+import {SearchBar} from 'react-native-elements';
 export default class extends Component {
   render() {
     return (

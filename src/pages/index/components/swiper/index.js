@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
-import {Text, Dimensions, StyleSheet, View, Image} from 'react-native';
-import {color, pxToDpH, pxToDpW, layout, size} from '@/MyStyle';
-import {SwiperFlatList} from 'react-native-swiper-flatlist';
+import {pxToDpH, pxToDpW, size} from '@/MyStyle';
 import {observer} from 'mobx-react';
+import React, {Component} from 'react';
+import {Dimensions, Image, StyleSheet, View} from 'react-native';
+import {SwiperFlatList} from 'react-native-swiper-flatlist';
 @observer
 export default class extends Component {
   render() {

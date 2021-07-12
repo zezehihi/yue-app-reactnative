@@ -1,25 +1,11 @@
-import React, {Component} from 'react';
-import {View, fromView, Image} from 'react-native';
-import TabNavigator from 'react-native-tab-navigator';
-import {
-  color,
-  pxToDpH,
-  pxToDpW,
-  layout,
-  size,
-  TouchableOpacity,
-} from '@/MyStyle';
-import {screenHeight, screenWidth} from '@/utils/stylesKits';
-import ScrollableTabView, {
-  DefaultTabBar,
-} from 'react-native-scrollable-tab-view';
+import {pxToDpH, pxToDpW, size} from '@/MyStyle';
 import Index from '@/pages/index';
 import My from '@/pages/my';
-import News from '@/pages/news';
-import IconFont from '@/components/IconFont';
-import {ActionPopover} from 'teaset';
-import {black} from 'chalk';
 import Share from '@/pages/share';
+import React, {Component} from 'react';
+import {Image, View} from 'react-native';
+import TabNavigator from 'react-native-tab-navigator';
+import {ActionPopover} from 'teaset';
 
 class TabBar extends Component {
   constructor(props) {

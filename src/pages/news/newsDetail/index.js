@@ -1,26 +1,19 @@
+import Api from '@/api/api';
+import IconFont from '@/components/IconFont';
+import TopNav from '@/components/topNav';
+import {pxToDpH, pxToDpW, size} from '@/MyStyle';
+import request from '@/services/request';
+import {inject} from 'mobx-react';
 import React, {Component} from 'react';
 import {
-  Text,
-  View,
-  StatusBar,
-  TouchableOpacity,
-  StyleSheet,
-  ImageBackground,
-  Animated,
-  Easing,
   ScrollView,
-  Modal,
+  StatusBar,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
-import {color, pxToDpH, pxToDpW, layout, size} from '@/MyStyle';
-import {Carousel, Overlay, Toast, ActionSheet} from 'teaset';
-import {Divider, Avatar, Image, Button, Input} from 'react-native-elements';
-import Api from '@/api/api';
-import request from '@/services/request';
-import TopNav from '@/components/topNav';
-import IconFont from '@/components/IconFont';
-import {Isao} from 'react-native-textinput-effects';
-import {observer, inject} from 'mobx-react';
+import {Avatar, Button, Divider, Image, Input} from 'react-native-elements';
+import {ActionSheet, Carousel, Overlay, Toast} from 'teaset';
 @inject('AccountStore')
 class Index extends Component {
   state = {

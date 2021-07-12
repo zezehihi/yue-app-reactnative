@@ -1,8 +1,6 @@
-import axios from 'axios';
-import RootStore from '@/stores';
-import {Platform} from 'react-native';
 import Toast from '@/components/Toast';
-import Api from '@/api/api';
+import RootStore from '@/stores';
+import axios from 'axios';
 const token = RootStore.token;
 
 const instance = axios.create({

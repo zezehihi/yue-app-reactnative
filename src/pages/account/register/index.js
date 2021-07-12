@@ -1,19 +1,11 @@
-import React, {Component} from 'react';
-import {
-  View,
-  Text,
-  Image,
-  StatusBar,
-  TouchableOpacity,
-  KeyboardAvoidingView,
-} from 'react-native';
-import request from '@/services/request';
 import Api from '@/api/api';
-import {inject, observer} from 'mobx-react';
-import {color, pxToDpH, pxToDpW, layout, size} from '@/MyStyle';
-import {Isao} from 'react-native-textinput-effects';
 import {Primary} from '@/components/button';
 import Toast from '@/components/Toast';
+import {color, pxToDpH, pxToDpW, size} from '@/MyStyle';
+import request from '@/services/request';
+import React, {Component} from 'react';
+import {Image, KeyboardAvoidingView, StatusBar, View} from 'react-native';
+import {Isao} from 'react-native-textinput-effects';
 // TODO 键盘遮挡
 class Register extends Component {
   state = {
@@ -40,7 +32,7 @@ class Register extends Component {
     const {success} = res.data;
     if (success == true) {
       Toast.showText('注册成功');
-      this.props.navigation.navigate('Index');
+      this.props.navigation.navigate('TabBar');
     } else {
       Toast.showText('注册失败');
     }
